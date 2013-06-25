@@ -1,0 +1,57 @@
+
+1) stack.h - Stack header file
+
+    o stack(int siz)
+        Constructs a stack object with maximum size as given.
+
+    o ~stack()
+        Destructor
+
+    o int push(int n)
+        Pushes number 'n' into the stack.
+        Returns 0 on success, -1 if stack is full.
+
+    o int pop(void)
+        Pops the top element of stack.
+        Returns the value popped, -1 if stack is empty.
+
+    o int size(void)
+        Returns number of elements in the stack
+
+    o int equals(stack *s2)
+        Returns 1 if both stacks have same number of elements, and same
+        elements in each position. Returns 0, otherwise.
+
+2) stack.cpp - Stack implementation file
+
+3) advanced_stack.h - Advanced stack header file
+    Advanced stack inherits from stack class.
+
+    o advanced_stack(int siz)
+        Constructs an advanced stack object with maximum size as given
+
+    o ~advanced_stack()
+        Destructor
+
+    o advanced_stack *clone(void)
+        Create a clone (exact copy) of this stack object.
+        Returns the new cloned stack.
+
+    o int fibonacci(void)
+        A fibonacci stack contains elements that correspond to the fibinacci
+        series. The bottom most two elements are 1, 1. Each element is the sum
+        of the two elements below that element in the stack.
+        Eg, [1, 1, 2, 3, 5, 8] where 8 is top of stack.
+        This function should return if the stack is a fibonacci stack.
+        Returns 1 if stack is fibonacci stack, 0 otherwise.
+
+    o void generate_fibonacci(int n)
+        This function should first empty the stack. It should then fill up
+        the stack with upto 'n' fibonacci numbers. It should do this by
+        popping top 2 elements (say t1, t2), calculating their sum, and
+        pushing back t2, t1, followed by their sum. It should repeat this
+        until the stack contains 'n' elements. You may assume that n will
+        ALWAYS be greater than 2.
+
+4) advanced_stack.cpp - Advanced stack implementation file
+

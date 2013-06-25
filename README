@@ -1,0 +1,32 @@
+This repository consists of problem statements along with their test stubs 
+for each exercise listed in the syllabus of BE CSE semester 3 data structures 
+lab (CS8311).
+
+Directory Structure
+-------------------
+Each exercise has a directory exN, and each programming problem for that
+exercise has a directory exN/pX. For each student, the files in one of the 
+problem directory will be copied to the student's workarea/home.
+ex1/
+  -- p1/
+    -- README (problem statement)
+    -- Makefile
+    -- stub.cpp
+  -- p2/
+    -- README
+    -- Makefile
+    -- stub.cpp
+  -- p3/
+    -- README
+    -- Makefile
+    -- stub.cpp
+ex2/
+  -- p1/
+    -- README
+    -- Makefile
+    -- stub.cpp
+  -- p2/
+    -- README
+    -- Makefile
+    -- stub.cpp
+

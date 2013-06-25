@@ -1,0 +1,66 @@
+Objective
+---------
+	To improve programming level of students, and expose them to various tools, techniques, and good programming practices.
+
+
+Methods
+-------
+1) Code, code, code
+	One of the feedback from 3rd yr student was that they were not given enough programs to work with. Since programming comes only with practice, it seems logical enough to give them more programs to work with.
+
+2) Clear doubt
+	Most of the time the students spend in the lab is spent in typing their code and showing output. Both these activities are non-productive and should be eliminated. Instead, lab time should be used by the students to clear doubts and work on more problems. But this will require some policy level changes, so that students can type in programs from anywhere (network access to lab server), and/or provde usb access in lab machines. Also, some level of automating the output checking should be done so that teachers and PG students are available to clear doubts, instead of checking output.
+
+3) Expose them to more programming tools
+	Students should be exposed and encouraged to use tools like vim, make, lint, gdb, valgrind etc.
+
+4) Pair programming
+	RP Mam has suggested pair programming, so that two students can work together to solve possibly two problems. This would increase interaction level among students in the lab, which is very low now.
+
+5) Reference solution
+	Showing them a reference solution might be useful in improving coding style and discipline among the students.
+
+
+Evaluation
+----------
+	Unfortunately, without an evaluation system, the above methods will fail. [But will it succeed with an evaluation system is still open :) ]. A proper fool proof evaluation system has to be put in place, so that students learn programming at least for marks, if not for anything else.
+
+1) Spontaneous exercise
+	It has been observed that most of the class just copy programs from their peer on the observation note and come and type it. A spontaneous exercise in every lab class might solve this problem, as it will encourage students to practice at home. For each exercise in the syllabus, there should be at least 5 practice problems. In every lab class, one of the problems will be assigned to each student randomly. Student is expected to solve the problem and when done, write the same in the observation note and get signed. Student can submit the solution any time after that, but with reduced marks. Once the class is over, all problems for that exercise would be made available to the student for further practice.
+
+2) Viva questions
+	Asking questions on the programs they write, removing some random line/character and asking them to debug, etc might ensure that the students are atleast aware of the program that they claim to have coded. But it will take more (or most of) time of the teacher/PG students, and there will be no time to clear doubts and help other students.
+
+3) Spontaneous exercise with pair programming
+	Extension of method 1. But in each class, 2 random students and paired, and assigned 2 random problems to solve.
+
+
+Test Automation
+---------------
+	It is preferred to automate the output checking process, which apart from being time consuming, is highly unproductive, for both students and faculty. A possible automation method is to generate one or more pairs of files <input.txt, output.txt> for each exercise. Once a student solves a problem, the executable will be passed input.txt, and the output will be compared to the expected output.txt. The advantage of this method is that for each exercise, no test stub code needs to be written, but only some text files which should be less time consuming than writing test stubs. But ofcourse, the problem has to be solved first, to generate the expected output.txt. But that is good in a way, because it can be displayed to the student as a reference, once his code has passed all the tests for that exercise. That way, he also gets an idea of some good coding practices.
+
+
+Action Plan
+-----------
+1) Tools Introduction
+	Introduce man, linux commands, vim, gcc, lint, make between exercises 1 to 4. After that, students should be familiar to use them for the rest of the exercises. First 4 exercises are ramp up time for them to learn the tools.
+
+
+Exercises
+---------
+	These are the exercises listed in the syllabus.
+
+1. Array based implementation of stack and queue.
+2. Linked list implementations and problems related to linked list such as inverting list, concatenation, etc.
+3. Linked list based implementation of stack and queue
+4. Evaluation of expressions
+5. Binary tree traversals
+6. Graph traversals
+7. Merge sort
+8. Quick sort
+9. Binary search
+10. Binary Heap
+11. AVL tree implementation
+12. Hash Tables
+
+

@@ -1,0 +1,53 @@
+
+1) stack.h - Stack header file
+
+    o stack(int siz)
+        Constructs a stack object with maximum size as given.
+
+    o ~stack()
+        Destructor
+
+    o int push(int n)
+        Pushes number 'n' into the stack.
+        Returns 0 on success, -1 if stack is full.
+
+    o int pop(void)
+        Pops the top element of stack.
+        Returns the value popped, -1 if stack is empty.
+
+    o int size(void)
+        Returns number of elements in the stack
+
+    o int equals(stack *s2)
+        Returns 1 if both stacks have same number of elements, and same
+        elements in each position. Returns 0, otherwise.
+
+2) stack.cpp - Stack implementation file
+
+3) advanced_stack.h - Advanced stack header file
+    Advanced stack inherits from stack class.
+
+    o advanced_stack(int siz)
+        Constructs an advanced stack object with maximum size as given
+
+    o ~advanced_stack()
+        Destructor
+
+    o advanced_stack *clone(void)
+        Create a clone (exact copy) of this stack object.
+        Returns the new cloned stack.
+
+    o advanced_stack *create_palindrome(void)
+        A palindrome stack is one which contains elements such that the first
+        half and second half of the stack are mirror images of each other.
+        You may assume that the palindrome stack ALWAYS contains even number
+        of elements.
+        Eg, [1, 2, 3, 3, 2, 1], [4, 7, 6, 6, 7, 4], etc.
+        This function should create a palindrome stack from the advanced stack.
+        It should do this by cloning 2 copies of the stack, pop each element
+        from the 1st clone, and push it onto the 2nd clone. The 2nd clone is
+	now a palindrome stack.
+        The function should return the created palindrome stack.
+
+4) advanced_stack.cpp - Advanced stack implementation file
+

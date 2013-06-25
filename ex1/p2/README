@@ -1,0 +1,55 @@
+
+1) stack.h - Stack header file
+
+    o stack(int siz)
+        Constructs a stack object with maximum size as given.
+
+    o ~stack()
+        Destructor
+
+    o int push(int n)
+        Pushes number 'n' into the stack.
+        Returns 0 on success, -1 if stack is full.
+
+    o int pop(void)
+        Pops the top element of stack.
+        Returns the value popped, -1 if stack is empty.
+
+    o int size(void)
+        Returns number of elements in the stack
+
+    o int equals(stack *s2)
+        Returns 1 if both stacks have same number of elements, and same
+        elements in each position. Returns 0, otherwise.
+
+2) stack.cpp - Stack implementation file
+
+3) advanced_stack.h - Advanced stack header file
+    Advanced stack inherits from stack class.
+
+    o advanced_stack(int siz)
+        Constructs an advanced stack object with maximum size as given
+
+    o ~advanced_stack()
+        Destructor
+
+    o advanced_stack *clone(void)
+        Create a clone (exact copy) of this stack object.
+        Returns the new cloned stack.
+
+    o int compare(advanced_stack *dst)
+        Compares each element of stack with elements of the 'dst' stack.
+        Returns 1 if stacks contain same elements, 0 otherwise.
+
+    o int palindrome(void)
+        A palindrome stack is one which contains elements such that the first
+        half and second half of the stack are mirror images of each other.
+        You may assume that the palindrome stack ALWAYS contains even number
+        of elements.
+        Eg, [1, 2, 3, 3, 2, 1], [4, 7, 6, 6, 7, 4], etc.
+        This function should check if the stack is a palindrome stack.
+        Returns 1 if the stack is palindrome, 0 otherwise.
+     
+
+4) advanced_stack.cpp - Advanced stack implementation file
+
