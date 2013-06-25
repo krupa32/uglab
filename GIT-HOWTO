@@ -1,0 +1,30 @@
+GIT-HOWTO
+---------
+This small tutorial is help you get upto speed on git.
+
+What is git?
+------------
+Git is a version control system, similar to CVS, Perforce, Clearcase etc.
+
+What is github?
+---------------
+Github is a website which can be used to create and maintain remote git
+repositories.
+
+Add yourself as a repository user
+---------------------------------
+Before using a github repository, you have to add your computer to the list
+of computers that can access the repository. For this, you have to
+generate a ssh public key, and add this public key in the github site.
+You can generate a ssh public key using
+    ssh-keygen -t rsa -C "email@domain.com"
+The created key is in ~/.ssh/id_rsa.pub, which you can copy and paste in the
+github website.
+
+Create a local repository
+-------------------------
+Cloning a remote repository allows you to create a local repository from a 
+remote repository.
+    git clone git@github.com:krupa32/uglab.git
+
+
