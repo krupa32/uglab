@@ -1,0 +1,83 @@
+
+This is a step-by-step tutorial on how to create, compile, and run basic
+C programs in the linux environment. Detailed information regarding the tools
+used can be seen in the accompanying linux.txt, vim.txt, gcc.txt and make.txt
+files.
+
+STEP 1 - ACCESSING LINUX
+------------------------
+
+Linux can be accessed using a standalone desktop model with Linux installed on
+it, or using a client-server model where users/clients can use a communication
+program like telnet/ssh from any desktop (client) running any OS and login to 
+a single Linux server machine. We will be using the client-server model, 
+because this model offers lot of flexibility and convenience.
+
+You can connect to a Linux server using a telnet program. Open the windows
+command prompt and type
+
+    c:\> telnet 10.1.1.80
+
+This will connect to a Linux server machine on IP address 10.1.1.80 and
+display a login screen. You can use the login name and password given to you
+by the lab administrator.
+
+STEP 2 - CREATING A C PROGRAM
+-----------------------------
+
+Vim is an editor that can be used to create any text file, including C
+programs. Vim is a very powerful editor, but it takes a little while to get
+used to it.
+
+Type
+
+    $ vim hello.c
+
+to start the vim editor. Press 'i' to enter into INSERT mode. Now type the
+following C program. [Note: Pressing ESC key reverts vim back into command
+mode. To enter into INSERT mode again, press 'i' key].
+
+    #include <stdio.h>
+
+    int main()
+    {
+        printf("Hello World!\n");
+        return 0;
+    }
+
+After you have typed the above legendary hello world program, press ESC to
+go back to vim command mode. Now type
+
+    :wq
+
+to save/write (w) the file, and quit (q). This will take you back to the shell
+prompt.
+
+STEP 3 - COMPILING THE PROGRAM
+------------------------------
+
+Linux include the 'gcc' C compiler by default. Type
+
+    $ gcc hello.c
+
+to compile the hello.c. This will create an executable file called a.out in the
+same directory. [Note: You can use 'ls' command to list the files in the
+current directory and verify that a.out is indeed present].
+
+STEP 4 - RUNNING THE EXECUTABLE
+-------------------------------
+
+Type
+
+    $ ./a.out
+
+to run the executable and verify 'Hello World!' is printed on screen.
+
+STEP 5 - CREATE MORE PROGRAMS
+-----------------------------
+
+Now that you know how to create a simple C program, compile it and run it,
+repeat steps 1 to 4 to create more C programs and become familiar with the
+environment. You might encounter interesting questions and behavior on the 
+way. Welcome to Linux. Happy journey!
+

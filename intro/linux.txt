@@ -1,0 +1,188 @@
+
+Linux is a programmer's OS. All programming and related tools are present by
+default in any Linux distribution. Anything absent can just as easily be 
+installed. Linux provides some excellent tools like
+    o Vim editor
+    o gcc/g++, the C/C++ compilers
+    o make, the build utility
+    o gdb, the debugger
+    o various other useful tools like lint, gprof, valgrind etc
+
+This tutorial will help you understand the basic commands that can be used
+in a Linux environment.
+
+LINUX OPERATING SYSTEM
+----------------------
+
+Linux comes in various distributions like Fedora, Ubuntu, Debian, CentOS etc,
+each one having a different look and feel. But the basic components in each
+distribution is always the same. Each distribution 'customizes' these
+components to provide the different favors. These basic components are
+
+    o Kernel: The core operating system, usually present in
+      /boot/vmlinuz-<version>
+
+    o Modules: These are dynamically loadable components which are loaded
+      _after_ the kernel loads. Typically optional device drivers, profiling
+      support are compiled as modules. The modules are present in
+      /lib/modules/<version>/ directory.
+
+    o Shell: The shell is a program that interprets commands and executes
+      them. The most popular shell is 'bash'. 
+
+    o Utilities: If the shell is to implement every possible linux command, 
+      then its size would be too big. So most of the linux commands are 
+      present as executable files, and the shell provides support to 
+      launch _any_ executable file. This way, the shell can be a small program.
+      Most common utilities are ls, mkdir etc.
+
+    o Desktop Environment: This component provides the graphical user
+      interface, that is easily usable by a normal non-programmer. Some
+      examples of desktop environments are Gnome, KDE etc.
+
+A linux distribution 'customizes' each and every component listed above and
+provides a package which can be readily installed and used.
+
+LINUX FILE SYSTEM
+-----------------
+
+A file system is part of an operating system, and helps the user to organize
+and store files, so that it can be easily and efficiently retrieved. Some
+examples of file systems are FAT, NTFS, EXT2, EXT3, NFS etc. Linux uses the
+EXT3 or EXT4 file system, both of which are based on the EXT2 file system.
+Like other file systems, EXT2 organizes files into nested directories or
+folders. That means, a directory contains a set of files and subdirectories.
+Each subdirectory may in turn contain a set of files and other subdirs, and
+so on.
+
+The root directory is the topmost directory in the file system and is denoted
+by '/'.
+
+A file can be specified using its absolute path starting from the root
+directory. All absolute paths start with '/'. For eg, /home/user/foo/bar 
+is an absolute path of a file named 'bar'.
+
+The shell maintains a current working directory. A file can also be specified
+using a 'relative path', which is relative to the current working directory.
+Relative paths DO NOT start with a '/'. For eg, if the current working 
+directory is /home/user, the 'bar' file can be specified as foo/bar.
+
+LINUX COMMANDS
+--------------
+
+In the following section, the convention followed is
+    $ cmd    - Anything followed by a '$' is a command
+    # text   - Anything followed by a '#' is a comment and is used to
+               to give more information about the nearest command
+    option -   This is a required option
+    [option] - This is optional, and can be omitted
+    file...  - one or more files
+
+man command
+    Display the manual page for the given command. This is the single most
+    important command in linux. If you are unsure of the purpose or usage of
+    any command, you can use this command to display its manual.
+
+    $ man ls
+    $ man mkdir
+
+pwd
+    Print current working directory.
+
+    $ pwd
+    /home/user
+
+mkdir [options] directory
+    Create a new directory with given name under the current directory. It can
+    also be used to create a directory under some other directory (other than
+    current dir) if the absolute path is given.
+
+    # Create a dir 'foo' under current dir
+    $ mkdir foo
+
+    # Create a dir 'bar' under /home/john/foo
+    $ mkdir /home/john/foo/bar
+
+cd [dir]
+    Change current working directory to 'dir'. 'dir' can be an absolute or
+    relative path of a directory. If dir is '..', current working directory
+    is changed to the previous level directory. If no 'dir' is given, current 
+    working directory is changed to the default home directory for the user.
+
+    $ cd foo/bar
+    $ cd /home/user/foo/bar
+
+    # if current working dir is /home/user/foo/bar
+    $ cd ..
+    # changes current working dir to /home/user/foo
+
+rmdir dir...
+    Removes specified directories, ONLY if the directories are empty.
+
+    $ rmdir foo/bar
+    $ rm /home/user/foo/bar
+
+ls [options] [dir/file]
+    Lists information about 'dir' or 'file'i, or current directory if no
+    dir/file is given. It is typically used to list the files under a given
+    directory.
+
+    # list files under current directory
+    $ ls
+
+    # list files under foo/bar
+    $ ls foo/bar
+
+cat [options] [file]
+    Prints 'file' on screen (standard output). If no 'file' is given, it reads
+    lines from standard input until end-of-file (Ctrl-d) is pressed, and then
+    prints it on screen.
+
+    $ cat README
+    $ cat test.cpp
+
+rm [options] file...
+    Removes the given file[s]. The 'file' argument can be an absolute path
+    or relative path.
+
+vim [options] [file ...]
+    Vi IMproved text editor. It is an improved version of the basic Vi editor,
+    with advanced features like syntax highlighting with different colors,
+    integration with ctags for tag support, visual selection etc. Basic
+    Vim commands and how to work using Vim can be found in the vim.txt file,
+    present in the same directory as this file.
+
+    $ vim test.c
+
+gcc [options] file...
+    GNU C compiler. It is normally used to compile single or multiple C source
+    files into an executable file (by default named a.out). However, there
+    are many options that can be used to control gcc's output. Useful options
+    that can be used are explained in the accompanying gcc.txt file.
+
+    # compiling single C file
+    $ gcc test.c
+
+    # compiling multiple C files
+    $ gcc file.c file2.c file3.c
+
+g++ [options] file
+    GNU C++ compiler. The options and usage are similar to gcc. To compile
+    C++ programs, g++ HAS to be used.
+
+    $ g++ test.cpp
+
+make [options] [target...]
+    Make is a build utility. When compiling multiple source files to make an
+    executable, it is common that only a small subset of the files change,
+    but all the files have to be recompiled together, wasting time and
+    resources. Make utility uses a user-given 'Makefile' to automatically
+    determine which files have changed and therefore have to be recompiled
+    to obtain the executable. Detailed operation of make is given in the
+    accompanying make.txt.
+
+    # build default target
+    $ make
+
+    # build target called 'test'
+    $ make test

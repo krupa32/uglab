@@ -1,0 +1,136 @@
+
+Vim is short for Vi IMproved. It is a very powerful editor, especially suited
+for writing programs and source code. It might look like vim is hard to use
+for first time users, but once you understand the essence and use it for
+some time, other editors will start looking clumsy and child-like compared
+to vim.
+
+MODES OF OPERATION
+------------------
+
+When vim is started (with or without a file), it starts in 'command' mode.
+The command mode is the default mode, and allows you to enter a lot of
+commands, wherein lies the power of vim. All commands are case-sensitive.
+
+Some of the commands cause vim to enter other modes of operation. Whichever
+mode you are in, 'ESC' key will revert vim to command mode.
+
+Some of the most common commands and their modes are listed below.
+
+    i - Insert mode. This is a normal text editing mode. You can type in
+        new characters, delete characters using DEL or BACKSPACE key, and
+        move around using arrow keys, Home/End/PgUp/PgDown keys etc.
+
+    a - Append mode. This is same as insert mode, except the cursor is
+        moved to next position before you can start editing.
+
+    r - Replace mode. This mode is used to replace a single character at the
+        current cursor position. Once a character is replaced, vim reverts to
+        command mode automatically.
+
+    v - Visual mode. This mode is used to select multiple lines of text using
+        arrow keys, just like in a normal editor but without using any SHIFT
+        key. Once selected, the normal cut/copy/paste commands explained
+        below can be used.
+
+HELP COMMANDS
+-------------
+
+:help [command]	- Displays help for given command. If no command is given,
+		  displays default help page. You can use ':q' command to quit
+		  from help page and revert to original file.
+
+
+FILE HANDLING COMMANDS
+----------------------
+
+These commands can be used to open/close/save files.
+
+:e [file]	- Opens given file. If no file is given, prints currently
+		  opened file.
+:e #[N]		- Vim allows opening multiple files at once, but displays
+		  only one file at a time. This command can be used to display
+		  the Nth opened file. If N is not given, it displays the last
+		  displayed file.
+:w [file]	- Writes/saves currently opened file to given file, and
+		  makes the new file as current file. If no file is given,
+		  saves to currently opened file.
+:q		- Quit vim
+:wq		- Save and quit vim
+:q!		- Quit vim without saving changes
+
+MOVEMENT COMMANDS
+-----------------
+
+These commands can be used to move the cursor.
+
+gg 	- First line of file
+G  	- Last line of file
+^  	- Beginning of current line (can also use Home key)
+$  	- End of current line (can also use End key)
+]] 	- Beginning '{' of next C function
+[[ 	- Beginning '{' of current C function
+:N 	- Line number 'N' of the file
+w  	- Next word/token
+%  	- Matching closing/opening brace. It can be used on any type of braces,
+          like '{', '}', '[', ']', '(', ')' etc
+
+EDITING COMMANDS
+----------------
+
+These commands can be used to cut/copy/paste text.
+
+[N]yy	- Yank/copy N following lines. If N is not given, yank current line
+[N]dd	- Delete/cut N following lines. If N not given, delete current line
+[N]p	- Paste last yanked/deleted line[s] N times
+
+y$	- Yank from cursor to end of line
+y%	- Yank till matching brace
+ytC	- Yank upto character C, but not including character C.
+          If C does not occur till end of line, then everything till end of 
+          line is yanked.
+          Eg, Consider "void foo(int param1, int param2)" and cursor is at
+          'f'. Command "yt," will now yank "foo(int param1".
+
+d$, dtC, d%
+	- Same as y$, ytC, y%, except it deletes instead of yanking
+
+SEARCH COMMANDS
+---------------
+
+These commands can be used to search/replace text. [ENTER] denotes the
+Enter key.
+
+/text[ENTER]	- Searches for 'text' in the file and moves cursor to first
+		  match. 'text' can be a simple string or even a regular
+		  expression. In fact, searching for regular expression is
+		  one of the most powerful features of vim. Interested readers
+		  can google and find out more about regular expressions.
+
+/[ENTER]	- Moves cursor to next match of last search
+?[ENTER]	- Moves cursor to previous match of last search
+
+*		- Searches forward for current word at cursor
+#		- Searches backward for current word at cursor
+n		- Moves to next/previous match based on current direction of
+		  search (forward or backward)
+
+:%s/search/replace/cg
+		- Searches for string 'search' and replaces it with string
+		  'replace'. Option 'g' specifies global, ie, all occurences
+		  of the search string in each line is replaced. Option
+		  'c' specifies confirm, ie, vim will ask for user's input
+		  before replacing each occurence.
+
+		  Just like search, the search string can also be a regular
+		  expression, which makes vim very powerful.
+
+
+INDENTATION COMMANDS
+--------------------
+
+These commands can be used to automatically indent C/C++ source code.
+
+[N]==	- Indents next N lines. If no N given, indents current line
+
+

@@ -1,0 +1,102 @@
+
+Make is a build utility. When compiling multiple source files to make an
+executable, it is common that only a small subset of the files change,
+but all the files have to be recompiled together, wasting time and
+resources. Make utility uses a user-given 'Makefile' to automatically
+determine which files have changed and therefore have to be recompiled
+to obtain the executable. This document explains how make works, and how
+to write basic Makefiles.
+
+HOW MAKE WORKS
+--------------
+
+In a big project involving multiple source files, it is common that one file
+depends on one or more other files. Makefiles written by the user specify 
+the dependencies between files, and the action to be taken if any of the
+dependent files change.
+
+Makefiles are text files which include a list of 'rules'. Each rule is of
+the form
+
+    target: file1 file2 file3 ...
+        command1
+        command2
+        ...
+
+'target' is called the make target. file1, file2, file3, etc are called 
+dependencies, and command1, command2, etc are called actions. 'make' checks
+the last modified timestamps of the make target and its dependencies. If
+ANY of the dependent files have its last modified time LATER than the last
+modified time of the target, then make will execute the actions. Typically,
+one of the actions will update/overwrite the target file, and thereby update
+its last modified timestamp.
+
+HOW TO WRITE MAKEFILES
+----------------------
+
+Let us take a small example to explain how makefiles are written. Let us 
+assume there are two source files main.c and global.c as follows.
+
+global.c
+--------
+
+int a = 5;
+
+main.c
+------
+
+#include <stdio.h>
+
+extern int a;
+
+int main()
+{
+    printf("a = %d\n", a);
+    return 0;
+}
+
+The traditional way of compiling these two files would be
+
+    $ gcc main.c global.c -o main
+
+The problem with this method of compilation is that even if one of the files
+change, both the files have to be recompiled and linked. While this may look
+trivial in our example, imagine the amount of time wasted if there are 100
+source files, and only one of them changes.
+
+A Makefile for the above would look as follows.
+
+main: main.o global.o
+    gcc main.o global.o -o main
+
+main.o: main.c
+    gcc -c main.c
+
+global.o: global.c
+    gcc -c global.c
+
+The above makefile specifies that the target 'main' depends on main.o and
+global.o. The target 'main.o' depends on main.c, and target 'global.o'
+depends on global.c.
+
+Type
+
+    $ make main
+    or
+    $ make
+
+to make the 'main' target. make will find that main.o and global.o are not
+present and will try to make those. It will find that main.o depends on main.c
+and will compile main.c. Similarly, it will compile global.c to create
+global.o. Once the dependent targets are created, make will now create the
+'main' target by linking main.o and global.o to create executable file 'main'.
+
+Now consider a situation where only global.c changes, and you make again.
+This time, make will determine global.c has changed and rebuild global.o.
+But it will not rebuild main.o, as main.c has not changed. Once global.o
+is created, global.o will have later timestamp than executable main, and
+hence make will now build the 'main' target by linking main.o and global.o.
+This way, only the changed source is built, and linked to create the
+executable.
+
+
