@@ -1,30 +1,119 @@
-GIT-HOWTO
----------
-This small tutorial is help you get upto speed on git.
 
-What is git?
+This small tutorial is to help you get upto speed on git.
+
+WHAT IS GIT?
 ------------
 Git is a version control system, similar to CVS, Perforce, Clearcase etc.
 
-What is github?
+HOW GIT WORKS
+-------------
+
+In a normal version control system like cvs, perforce etc, a single
+repository of the source code is maintained in a shared server machine.
+Users can 'checkout' code from this server, and 'checkin' their changes
+back to this server. This model is intuitive and easily understandable.
+
+Git uses a less intuitive model, which offers more flexibility for developers.
+The philosophy of git is that every user maintains his/her own repository
+in their local machine, to which they can checkin changes. Any user can then
+'pull' changes from other users' repositories whenever desired, merge the
+changes, and checkin to their local repository.
+
+When you pull from other user's repository, the other user's repository
+is also called as a 'remote'.
+
+GIT WORKFLOWS
+-------------
+
+Based on how git works, ie, each user maintains their own repository,
+there are two different workflow models.
+
+A) Pull Model
+	This is the model explained above and is the intended way git is 
+to be used. Each user maintains a local repository, and whenever they need
+another user's (remote's) changes, they pull in the changes and merges them.
+
+B) Shared Repository Model
+	This is the model how cvs, perforce works. There is a single shared
+repository. Every user checks out from this repository, makes changes, and
+checks in the changes. It is not the intended way to use git, so git must 
+be used to 'simulate' this model. The following diagram explains how this model
+can be simulated using git.
+
+                           Single Shared Repository
+                             |             |
+           -------------------             ----------
+           |                                         |
+    Local Mirror of   | Copy of                Local Mirror of   | Copy of
+    Shared Repository | Local Mirror           Shared Repository | Local Mirror
+
+Each user maintains a local mirror of the single shared repository. This local
+mirror is always up-to-date and exact mirror of the shared repository. The
+user periodically pulls changes from the shared repo, and keeps the local
+mirror up-to-date.
+
+Whenever user wants to make changes, he/she does the following.
+1) Pull changes from shared repo to local mirror
+2) Copy the local mirror to another directory
+3) Make changes in the copy [This could take minutes, hours, days etc]
+4) Pull changes from shared repo to local mirror
+5) Merge changes from copy to local mirror
+6) Push changes from local mirror to shared repo
+
+
+WHAT IS GITHUB?
 ---------------
-Github is a website which can be used to create and maintain remote git
-repositories.
+Github is a website which can be used to create and maintain git
+repositories on the internet. Repositories in github can be accessed using
+many protocols, including ssh, which is normally used.
 
-Add yourself as a repository user
----------------------------------
-Before using a github repository, you have to add your computer to the list
-of computers that can access the repository. For this, you have to
-generate a ssh public key, and add this public key in the github site.
-You can generate a ssh public key using
-    ssh-keygen -t rsa -C "email@domain.com"
-The created key is in ~/.ssh/id_rsa.pub, which you can copy and paste in the
-github website.
 
-Create a local repository
--------------------------
-Cloning a remote repository allows you to create a local repository from a 
-remote repository.
-    git clone git@github.com:krupa32/uglab.git
+HOW TO USE A GITHUB REPOSITORY
+------------------------------
 
+We will be using the shared repository model.
+
+Github identifies computers/laptops from which the user will access it
+using ssh keys. Once a ssh key is generated and added to the list of users
+in github, user can do following steps to work on a shared repository.
+
+1) Clone the repository to a local mirror
+
+    $ git clone git@github.com:krupa32/uglab.git
+
+2) Pull in the latest changes to the mirror (Not required first time)
+
+    $ git pull origin master
+
+3) Make copy of the local mirror
+
+    $ cp -R uglab/* uglab-copy/
+
+4) Make changes in the copy of local mirror
+
+5) Pull in the latest changes to the mirror
+	This step is required because while you were making changes, some other
+user could have checked in their changes, and hence the mirror would be 
+out-of-sync. The mirror HAS to be in-sync before your changes can be pushed
+back to the shared repo.
+
+    $ git pull origin master
+
+6) Merge changes in copy to the local mirror
+	Merging can be done by using vimdiff tool.
+
+    $ vimdiff uglab-copy/test.c uglab/test.c
+
+7) Add the changes in the mirror
+	Goto the mirror directory (uglab/) and type
+
+    $ git add .
+
+8) Commit the changes in the mirror
+
+    $ git commit -m "change message"
+
+9) Push the changes to the shared repo
+
+    $ git push
 
