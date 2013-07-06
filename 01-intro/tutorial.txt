@@ -78,6 +78,12 @@ STEP 5 - CREATE MORE PROGRAMS
 
 Now that you know how to create a simple C program, compile it and run it,
 repeat steps 1 to 4 to create more C programs and become familiar with the
-environment. You might encounter interesting questions and behavior on the 
-way. Welcome to Linux. Happy journey!
+environment. Please create all your files in the directory created for that
+session. Avoid creating any files in the home directory or any other
+directory.
+
+Additional exercises are present in the exercises.txt file in the same
+directory.
+
+Welcome to Linux. Happy journey!
 

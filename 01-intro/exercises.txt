@@ -1,0 +1,28 @@
+
+Initial instructions: 
+
+Login to your machine using the given user id and password.
+Then type the following:
+sh /home/c3ds/get.sh intro
+cd intro
+cat tutorial.txt
+
+Simple Exercises 
+
+1. Display Hello World
+2. Fahrenheit to Celsius and Celsius to Fahrenheit conversion.
+3. Factorial 
+    
+4. Largest of 3 numbers
+
+5. Generating Arithmetic Progression, given a, 'd' and 'n': 
+5a. Generate till 'n' is reached 
+5b. Generate 'n' numbers
+
+6. Generating Geometric Progression given a, 'r' and 'n': 
+6a. Generate till 'n' is reached 
+6b. Generate 'n' numbers
+
+7. Fibonacci Series generation, given 'x':
+7a. Generate till 'x' is reached 
+7b. Generate 'x' numbers

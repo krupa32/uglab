@@ -73,13 +73,29 @@ HOW TO USE A GITHUB REPOSITORY
 
 We will be using the shared repository model.
 
+To use a github repository, you have to create an account in github.com.
+
 Github identifies computers/laptops from which the user will access it
-using ssh keys. Once a ssh key is generated and added to the list of users
-in github, user can do following steps to work on a shared repository.
+using ssh keys. Therefore, user has to generate ssh public keys for the
+desktops/laptops from which github will be accessed, and the same should be
+added in github.com under the Account Settings section. How to generate ssh
+keys is explained in github.com under Account Settings -> Add SSH Keys page.
+
+Once done, this account has to be added as a 'collaborator' to the
+shared repository. This is typically done by the user who has created the
+shared repository.
+
+After that, the following steps can be done to use the shared repository.
 
 1) Clone the repository to a local mirror
 
     $ git clone git@github.com:krupa32/uglab.git
+
+The above will clone the shared repo using ssh protocol. In some cases, where
+the ssh port is blocked in the network, the https protocol can be used instead.
+To clone using the https protocol,
+
+    $ git clone https://github.com/krupa32/uglab.git
 
 2) Pull in the latest changes to the mirror (Not required first time)
 
