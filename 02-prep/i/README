@@ -1,0 +1,89 @@
+
+GENERAL INSTRUCTIONS
+--------------------
+
+This session introduces you to Makefiles and how make is used. For more
+details on how 'make' works, you can refer to 01-intro/make.txt.
+
+This session contains 3 exercises for you to solve - ex1, ex2 and ex3.
+Each exercise requires you to create a corresponding C file, ie, ex1.c,
+ex2.c and ex3.c. After solving exercise 1, you can type
+
+    $ make ex1
+
+to compile and build the 'ex1' executable. This will allow you to fix any 
+compilation errors. Once the 'ex1' executable is built, you can test your
+solution by typing
+
+    $ make test_ex1
+
+Similarly, for building and testing ex2, you can type 'make ex2' and
+'make test_ex2'. And for ex3, you can type 'make ex3' and 'make test_ex3'.
+
+
+Exercise 1
+----------
+
+Create a file ex1.c with the following C function.
+
+    void to_upper(char *str);
+    void to_lower(char *str);
+
+This function to_upper() should convert all lower case letters (a-z) in 'str'
+to upper case (A-Z). All other characters like numbers, special chars etc 
+should remain as is. The converted characters are also stored in the same
+string 'str'.
+
+The function to_lower() should work in the same way, but convert upper case
+letters to lower case.
+
+Examples for to_upper():
+    Input: str = "Hello World"
+    Output: str = "HELLO WORLD"
+
+    Input: str = "HELLO WORLD!"
+    Output: str = "HELLO WORLD!"
+
+
+Examples for to_lower():
+    Input: str = "HELLO WORLD!"
+    Output: str = "hello world!"
+
+
+Exercise 2
+----------
+
+Create a file ex2.c with the following function.
+
+    void compress(char *str);
+
+This function should collapse any sequence of one or more blank spaces
+to a single blank space ' '. The compressed string is returned in the same
+string 'str'.
+
+Examples:
+    Input: str = "Hello    World"
+    Output: str = "Hello World"
+
+    Input: str = "   Hello    World   "
+    Output: str = " Hello World "
+
+
+Exercise 3
+----------
+
+Create a file ex3.c with the following C function.
+
+    int get_num_occurences(char *str, char *word);
+
+This function should return the number of occurences of 'word' in 'str'.
+If 'word' does not occur in 'str', it should return 0. You can assume all words
+are separated by blank space ' '.
+
+Examples:
+    Input: str = "Hello World", word = "World"
+    Output: 1
+
+    Input: str = "Hello World", word = "World!"
+    Output: 0
+

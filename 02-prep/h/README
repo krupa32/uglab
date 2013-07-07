@@ -1,0 +1,90 @@
+
+GENERAL INSTRUCTIONS
+--------------------
+
+This session introduces you to Makefiles and how make is used. For more
+details on how 'make' works, you can refer to 01-intro/make.txt.
+
+This session contains 3 exercises for you to solve - ex1, ex2 and ex3.
+Each exercise requires you to create a corresponding C file, ie, ex1.c,
+ex2.c and ex3.c. After solving exercise 1, you can type
+
+    $ make ex1
+
+to compile and build the 'ex1' executable. This will allow you to fix any 
+compilation errors. Once the 'ex1' executable is built, you can test your
+solution by typing
+
+    $ make test_ex1
+
+Similarly, for building and testing ex2, you can type 'make ex2' and
+'make test_ex2'. And for ex3, you can type 'make ex3' and 'make test_ex3'.
+
+
+Exercise 1
+----------
+
+Create a file ex1.c which has the following C function.
+
+    void rotate(char *str, int direction, int count);
+
+This function should rotate the characters in the string 'str' by 'count'
+number of characters. If direction is 1, left rotation is done. If direction
+is 2, right rotation is done. The resulting rotated string is stored in the same
+string 'str'.
+
+Example:
+    Input: str = "12345678", direction = 1, count = 3
+    Output: str = "45678123"
+
+    Input: str = "12345678", direction = 2, count = 3
+    Output: str = "67812345"
+
+
+Exercise 2
+----------
+
+Create a file ex2.c with the following C function.
+
+    void num_to_words(int n, char *words);
+
+The function should convert the given number 'n' into words, and store it in
+the 'words' argument. You can assume 'n' lies between 1 and 99999.
+
+For eg,
+    Input: n = 100
+    Output: words = "One Hundred"
+
+    Input: n = 127
+    Output: words = "One Hundred Twenty Seven"
+
+    Input: n = 22345
+    Output: words = "Twenty Two Thousand Three Hundred Forty Five"
+
+    Input: n = 22045
+    Output: words = "Twenty Two Thousand Forty Five"
+
+    Input: n = 22305
+    Output: words = "Twenty Two Thousand Three Hundred Five"
+
+
+Exercise 3
+----------
+
+Create a file ex3.c with the following C function.
+
+    void get_word(char *str, int n, char *word);
+
+This function takes a string 'str' and a number 'n' as parameter. It should
+return the n'th word in the string 'str'. The return value should be copied
+to the 'word' parameter. If n is greater than number of words in the string,
+then the function should copy a null string "" to 'word'. You can assume each
+word is separated by a blank space ' '.
+
+Examples:
+    Input: str = "Hello World", n = 2
+    Output: word = "World"
+
+    Input: str = "Hello World", n = 3
+    Output: word = ""
+

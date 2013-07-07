@@ -1,0 +1,91 @@
+
+GENERAL INSTRUCTIONS
+--------------------
+
+This session introduces you to Makefiles and how make is used. For more
+details on how 'make' works, you can refer to 01-intro/make.txt.
+
+This session contains 3 exercises for you to solve - ex1, ex2 and ex3.
+Each exercise requires you to create a corresponding C file, ie, ex1.c,
+ex2.c and ex3.c. After solving exercise 1, you can type
+
+    $ make ex1
+
+to compile and build the 'ex1' executable. This will allow you to fix any 
+compilation errors. Once the 'ex1' executable is built, you can test your
+solution by typing
+
+    $ make test_ex1
+
+Similarly, for building and testing ex2, you can type 'make ex2' and
+'make test_ex2'. And for ex3, you can type 'make ex3' and 'make test_ex3'.
+
+
+Exercise 1
+----------
+
+Create a file ex1.c with the following C function.
+
+    void shift(char *str, int direction, int count);
+
+This function should shift the given string 'str' to the left or right by
+the given 'count' number of characters. If direction is 1, left shift is done.
+If direction is 2, right shift is done. The resulting shifted string is stored
+in the same string 'str'.
+
+Note that the string length does not change after the shift. Empty spaces
+introduced due to the shift is filled in by the space character ' '.
+
+Examples:
+    Input: str = "Hello World", direction = 1, count = 3
+    Output: str = "lo World   "
+
+    Input: str = "Hello World", direction = 2, count = 3
+    Output: str = "   Hello Wo"
+
+
+Exercise 2
+----------
+
+Create a file ex2.c with the following C function.
+
+    void trim(char *str);
+
+The function should remove any leading and trailing blank space character ' '
+from the string 'str', and store the result in the same string 'str'.
+
+Examples:
+    Input: str = "    Hello World"
+    Output: str = "Hello World"
+
+    Input: str = "    Hello World     "
+    Output: str = "Hello World"
+
+
+Exercise 3
+----------
+
+Create a file ex3.c with the following C functions.
+
+    void get_longest_word(char *str, char *longest);
+    void get_shortest_word(char *str, char *shortest);
+
+The get_longest_word() function takes as input a string 'str' which contains
+a list of words separated by blank space ' '. It should store the longest
+word in the string in the 'longest' argument.
+
+The get_shortest_word() function should work similarly, but store the shortest
+word in the string in the 'shortest' argument.
+
+Examples for get_longest_word():
+    Input: str = "Hello C"
+    Output: longest = "Hello"
+
+    Input: str = "Hello"
+    Output: longest = "Hello"
+
+    Input: str = "Hello strange world of C"
+    Output: longest = "strange"
+
+
+
