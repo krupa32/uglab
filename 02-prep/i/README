@@ -5,9 +5,9 @@ GENERAL INSTRUCTIONS
 This session introduces you to Makefiles and how make is used. For more
 details on how 'make' works, you can refer to 01-intro/make.txt.
 
-This session contains 3 exercises for you to solve - ex1, ex2 and ex3.
+This session contains 4 exercises for you to solve - ex1, ex2, ex3 and ex4.
 Each exercise requires you to create a corresponding C file, ie, ex1.c,
-ex2.c and ex3.c. After solving exercise 1, you can type
+ex2.c, ex3.c and ex4.c. After solving exercise 1, you can type
 
     $ make ex1
 
@@ -20,11 +20,29 @@ solution by typing
 Similarly, for building and testing ex2, you can type 'make ex2' and
 'make test_ex2'. And for ex3, you can type 'make ex3' and 'make test_ex3'.
 
+Hint: You can define a temporary buffer in your function and use strcpy
+library function wherever required.
+
+
 
 Exercise 1
 ----------
 
 Create a file ex1.c with the following C function.
+
+    int square(int n);
+
+The function should return the square of the number 'n'.
+
+Examples:
+    Input: 5
+    Output: 25
+
+
+Exercise 2
+----------
+
+Create a file ex2.c with the following C function.
 
     void to_upper(char *str);
     void to_lower(char *str);
@@ -46,14 +64,14 @@ Examples for to_upper():
 
 
 Examples for to_lower():
-    Input: str = "HELLO WORLD!"
+    Input: str = "HELLO world!"
     Output: str = "hello world!"
 
 
-Exercise 2
+Exercise 3
 ----------
 
-Create a file ex2.c with the following function.
+Create a file ex3.c with the following function.
 
     void compress(char *str);
 
@@ -69,10 +87,10 @@ Examples:
     Output: str = " Hello World "
 
 
-Exercise 3
+Exercise 4
 ----------
 
-Create a file ex3.c with the following C function.
+Create a file ex4.c with the following C function.
 
     int get_num_occurences(char *str, char *word);
 

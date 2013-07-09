@@ -5,9 +5,9 @@ GENERAL INSTRUCTIONS
 This session introduces you to Makefiles and how make is used. For more
 details on how 'make' works, you can refer to 01-intro/make.txt.
 
-This session contains 3 exercises for you to solve - ex1, ex2 and ex3.
+This session contains 4 exercises for you to solve - ex1, ex2, ex3 and ex4.
 Each exercise requires you to create a corresponding C file, ie, ex1.c,
-ex2.c and ex3.c. After solving exercise 1, you can type
+ex2.c, ex3.c and ex4.c. After solving exercise 1, you can type
 
     $ make ex1
 
@@ -20,11 +20,31 @@ solution by typing
 Similarly, for building and testing ex2, you can type 'make ex2' and
 'make test_ex2'. And for ex3, you can type 'make ex3' and 'make test_ex3'.
 
+Hint: You can define a temporary buffer in your function and use strcpy
+library function wherever required.
+
 
 Exercise 1
 ----------
 
 Create a file ex1.c with the following C function.
+
+    int absdiff(int a, int b);
+
+The function should return the absolute difference between a and b.
+
+Examples:
+    Input: a = 5, b = 2
+    Output: 3
+
+    Input: a = 7, b = 10
+    Output: 3
+
+
+Exercise 2
+----------
+
+Create a file ex2.c with the following C function.
 
     void shift(char *str, int direction, int count);
 
@@ -44,15 +64,17 @@ Examples:
     Output: str = "   Hello Wo"
 
 
-Exercise 2
+Exercise 3
 ----------
 
-Create a file ex2.c with the following C function.
+Create a file ex3.c with the following C function.
 
     void trim(char *str);
 
-The function should remove any leading and trailing blank space character ' '
+The function should remove ONLY leading and trailing blank space character ' '
 from the string 'str', and store the result in the same string 'str'.
+Consecutive blank space characters that occur in the middle of the string
+should remain as is. ONLY leading and trailing spaces should be trimmed.
 
 Examples:
     Input: str = "    Hello World"
@@ -61,11 +83,14 @@ Examples:
     Input: str = "    Hello World     "
     Output: str = "Hello World"
 
+    Input: str = "    Hello    World     "
+    Output: str = "Hello    World"
 
-Exercise 3
+
+Exercise 4
 ----------
 
-Create a file ex3.c with the following C functions.
+Create a file ex4.c with the following C functions.
 
     void get_longest_word(char *str, char *longest);
     void get_shortest_word(char *str, char *shortest);

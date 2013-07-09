@@ -5,9 +5,9 @@ GENERAL INSTRUCTIONS
 This session introduces you to Makefiles and how make is used. For more
 details on how 'make' works, you can refer to 01-intro/make.txt.
 
-This session contains 3 exercises for you to solve - ex1, ex2 and ex3.
+This session contains 4 exercises for you to solve - ex1, ex2, ex3 and ex4.
 Each exercise requires you to create a corresponding C file, ie, ex1.c,
-ex2.c and ex3.c. After solving exercise 1, you can type
+ex2.c, ex3.c and ex4.c. After solving exercise 1, you can type
 
     $ make ex1
 
@@ -20,11 +20,31 @@ solution by typing
 Similarly, for building and testing ex2, you can type 'make ex2' and
 'make test_ex2'. And for ex3, you can type 'make ex3' and 'make test_ex3'.
 
+Hint: You can define a temporary buffer in your function and use strcpy
+library function wherever required.
+
 
 Exercise 1
 ----------
 
-Create a file ex1.c which has the following C function.
+Create a file ex1.c with the following C function.
+
+    int maxx(int a, int b, int c);
+
+The function should return the maximum of the 3 numbers.
+
+Examples:
+    Input: a=1, b=3, c=2
+    Output: 3
+
+    Input: a = -1, b = -3, c=2
+    Output: 2
+
+
+Exercise 2
+----------
+
+Create a file ex2.c which has the following C function.
 
     void rotate(char *str, int direction, int count);
 
@@ -41,10 +61,10 @@ Example:
     Output: str = "67812345"
 
 
-Exercise 2
+Exercise 3
 ----------
 
-Create a file ex2.c with the following C function.
+Create a file ex3.c with the following C function.
 
     void num_to_words(int n, char *words);
 
@@ -68,10 +88,10 @@ For eg,
     Output: words = "Twenty Two Thousand Three Hundred Five"
 
 
-Exercise 3
+Exercise 4
 ----------
 
-Create a file ex3.c with the following C function.
+Create a file ex4.c with the following C function.
 
     void get_word(char *str, int n, char *word);
 

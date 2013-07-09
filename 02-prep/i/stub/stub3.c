@@ -1,45 +1,48 @@
 #include<stdio.h>
 #include<string.h>
-extern int get_num_occurences(char *str,char *word);
+extern void compress(char *str);
 int main()
 {
-	char str[50],word[10];
-        int n=0;
+	char str[50];
 	strcpy(str,"hello world");
-	strcpy(word,"hello");
-	n=get_num_occurences(str,word);
-	printf("single occurance...");
-	if(n!=1)	
+	compress(str);
+	printf("single space...");
+	if( strcmp(str,"hello world"))
+		goto end;
+	printf("ok\n");
+	
+	strcpy(str,"more    space");
+	printf("more space between words...");
+	compress(str);
+	if(strcmp(str,"more space"))
 		goto end;
 	printf("ok\n");
 
-       strcpy(str,"world hello world world");
-        strcpy(word,"world");
-        n=get_num_occurences(str,word);
-        printf("several occurance...");
-        if(n!=3)        
-                goto end;
-        printf("ok\n");
+	strcpy(str, "   hello");
+	printf("more space in the begining...");
+	compress(str);
+	if(strcmp(str," hello"))
+		goto end;
+	printf("Ok\n");
 
-       strcpy(str,"hello world");
-        strcpy(word,"nill");
-        n=get_num_occurences(str,word);
-        printf("no occurance...");
-        if(n!=0)        
-                goto end;
-        printf("ok\n");
-
-       strcpy(str,"helloo world");
-        strcpy(word,"hello");
-        n=get_num_occurences(str,word);
-        printf("as a substring occurance...");
-        if(n!=0)        
+	strcpy(str,"nospace");
+	printf("single word...");
+	compress(str);
+	if(strcmp(str,"nospace"))
+		goto end;
+	printf("ok\n");
+	
+	
+        strcpy(str,"TOLOWER    ");
+        printf("more space at the end...");
+        compress(str);
+        if(strcmp(str,"TOLOWER "))
                 goto end;
         printf("ok\n");
 
 	return 0;
 end:
-	printf(" failed\n");
+	printf("\n This case failed\n");
 	return -1;
 }
 	
