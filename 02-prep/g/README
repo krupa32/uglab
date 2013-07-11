@@ -40,6 +40,9 @@ Examples:
     Input: a = 7, b = 10
     Output: 3
 
+    Input: a = 3, b = -4
+    Output: 7
+
 
 Exercise 2
 ----------
