@@ -6,6 +6,8 @@ This session introduces you to Makefiles and how make is used. For more
 details on how 'make' works, you can refer to 01-intro/make.txt.
 
 This session contains 4 exercises for you to solve - ex1, ex2, ex3 and ex4.
+Each exercise requires you to write a single C function. Remember you are
+NOT SUPPOSED to write any main() function.
 Each exercise requires you to create a corresponding C file, ie, ex1.c,
 ex2.c, ex3.c and ex4.c. After solving exercise 1, you can type
 
@@ -29,7 +31,7 @@ Exercise 1
 
 Create a file ex1.c with the following C function.
 
-    int maxx(int a, int b, int c);
+    int max(int a, int b, int c);
 
 The function should return the maximum of the 3 numbers.
 
@@ -51,7 +53,7 @@ Create a file ex2.c which has the following C function.
 This function should rotate the characters in the string 'str' by 'count'
 number of characters. If direction is 1, left rotation is done. If direction
 is 2, right rotation is done. The resulting rotated string is stored in the same
-string 'str'.
+string 'str'. You can assume that 'str' has maximum 50 characters.
 
 Example:
     Input: str = "12345678", direction = 1, count = 3
@@ -65,33 +67,6 @@ Exercise 3
 ----------
 
 Create a file ex3.c with the following C function.
-
-    void num_to_words(int n, char *words);
-
-The function should convert the given number 'n' into words, and store it in
-the 'words' argument. You can assume 'n' lies between 1 and 99999.
-
-For eg,
-    Input: n = 100
-    Output: words = "One Hundred"
-
-    Input: n = 127
-    Output: words = "One Hundred Twenty Seven"
-
-    Input: n = 22345
-    Output: words = "Twenty Two Thousand Three Hundred Forty Five"
-
-    Input: n = 22045
-    Output: words = "Twenty Two Thousand Forty Five"
-
-    Input: n = 22305
-    Output: words = "Twenty Two Thousand Three Hundred Five"
-
-
-Exercise 4
-----------
-
-Create a file ex4.c with the following C function.
 
     void get_word(char *str, int n, char *word);
 
@@ -107,4 +82,31 @@ Examples:
 
     Input: str = "Hello World", n = 3
     Output: word = ""
+
+
+Exercise 4
+----------
+
+Create a file ex4.c with the following C function.
+
+    void num_to_words(int n, char *words);
+
+The function should convert the given number 'n' into words, and store it in
+the 'words' argument. You can assume 'n' lies between 1 and 99999.
+ 
+For eg,
+    Input: n = 100
+    Output: words = "One Zero Zero"
+
+    Input: n = 127
+    Output: words = "One Two Seven"
+
+    Input: n = 22345
+    Output: words = "Two Two Three Four Five"
+
+    Input: n = 22045
+    Output: words = "Two Two Zero Four Five"
+
+    Input: n = 22305
+    Output: words = "Two Two Three Zero Five"
 
