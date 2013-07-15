@@ -15,6 +15,8 @@ void rotate(char *str, int direction, int count)
 	else
 		index = len - count;
 
+	index = index % len;
+
 	for (i = 0; i < len; i++) {
 		tmp[i] = str[index];
 		index = (index + 1) % len;
