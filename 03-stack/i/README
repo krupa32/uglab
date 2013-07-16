@@ -1,0 +1,89 @@
+
+Exercise 1
+----------
+
+Create a file ex1.c with the following C function.
+
+    int sum(int arr[], int i1, int i2);
+
+The function should extract the two array elements at index 'i1' and 'i2'.
+It should then return the sum of these two elements.
+
+You can compile and test using 'make test_ex1'.
+
+Examples:
+    Input: arr = { 1, 2, 3, 4 }, i1 = 0, i2 = 2
+    Output: 4
+
+    Input: arr = { 1, 2, 3, 4 }, i1 = 3, i2 = 2
+    Output: 7
+
+
+STACK
+-----
+
+A stack is a data structure that supports the last-in-first-out functionality.
+The last data item that enters the stack is the first data item that can be
+retrieved from the stack.
+
+It supports two basic operations: push and pop. The push operation stores
+the data item in the stack, and the pop operation returns the last pushed
+data item. The next pop returns the previosuly pushed data item, and so on.
+
+A stack is typically implemented using an array of elements and an integer
+that stores the array index of the top-of-stack. Push operation would store
+the element at index 'top-of-stack', and increment top-of-stack. Pop operation
+would decrement the 'top-of-stack' and return the element at index top-of-stack.
+
+A stack typically has a 'size' which specifies the maximum number of elements
+that can be stored in the stack. A stack is considered empty if it has no
+elements, and is considered full it has 'size' elements.
+
+
+Exercise 2
+----------
+
+Create a file stack.c which implements a 50 character stack, ie, a stack of
+50 characters. The stack should support the following functions.
+
+    int push(char c);
+    int pop(char *c);
+
+The 'push' function should push the character 'c' onto top of the stack.
+It should return 1 on success, 0 on failure (ie, stack is full).
+
+The 'pop' function should decrement the top of the stack and store the top 
+most character in the stack in the pointer 'c'. It should return 1 on success,
+or 0 on failure (ie, stack is empty).
+
+You can compile and test using 'make test_stack'.
+
+[Note: The array and top-of-stack can be declared as globals for now]
+
+
+Exercise 3
+----------
+
+ *** YOU WILL HAVE TO FINISH THE PREVIOUS EXERCISE BEFORE WORKING ON THIS ***
+
+Create a file reverse.c with the following C function.
+
+    void reverse(const char *str, char *reverse_str);
+
+The function should reverse the string 'str' and store it in 'reverse_str'.
+The reverse should be done using the character stack defined in the previous
+exercise. The function should push all characters in 'str' from left-to-right
+into the stack. Then the function should pop all characters one-by-one and 
+store it in 'reverse_str'. Since the stack is a last-in-first-out data
+structure, this sequence of operations would reverse the string.
+
+The file reverse.c should contain ONLY the 'reverse' function.
+The make will reuse the push() and pop() already defined in stack.c.
+But if you try to use push() and pop() without declaring their prototypes,
+the compiler will give an error. Therefore, make sure you declare the
+prototypes as follows.
+
+extern int push(char c);
+extern int pop(char *c);
+
+You can compile and test using 'make test_reverse'.
