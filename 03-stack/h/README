@@ -1,0 +1,112 @@
+
+Exercise 1
+----------
+
+Create a file ex1.c with the following C function.
+
+    int equal_interval(int arr[], int size);
+
+The function takes an array 'arr' along with its size, and checks whether the
+numbers in the array occur at equal intervals. For example, the numbers
+1, 2, 3, 4, 5 occur at equal intervals of 1. The numbers 4, 7, 10, 13  occur
+at equal intervals of 3. The numbers 5, 7, 10, 12 DO NOT occur at equal
+intervals.
+
+The function should check each element of array and return 1 if all numbers
+in the array occur at equal intervals. It should return 0 otherwise.
+
+You can compile and test using 'make test_ex1'.
+
+Examples:
+    Input: arr = { 1, 2, 3, 4 }, size = 4
+    Output: 1
+
+    Input: arr = { 4, 7, 10, 13, 16 }, size = 5
+    Output: 1
+
+    Input: arr = { 4, 7, 10, 14, 16 }, size = 5
+    Output: 0
+
+
+STACK
+-----
+
+A stack is a data structure that supports the last-in-first-out functionality.
+The last data item that enters the stack is the first data item that can be
+retrieved from the stack.
+
+It supports two basic operations: push and pop. The push operation stores
+the data item in the stack, and the pop operation returns the last pushed
+data item. The next pop returns the previosuly pushed data item, and so on.
+
+A stack is typically implemented using an array of elements and an integer
+that stores the array index of the top-of-stack. Push operation would store
+the element at index 'top-of-stack', and increment top-of-stack. Pop operation
+would decrement the 'top-of-stack' and return the element at index top-of-stack.
+
+A stack typically has a 'size' which specifies the maximum number of elements
+that can be stored in the stack. A stack is considered empty if it has no
+elements, and is considered full it has 'size' elements.
+
+
+Exercise 2
+----------
+
+Create a file stack.c which implements a 50 character stack, ie, a stack of
+50 characters. The stack should support the following functions.
+
+    int push(char c);
+    int pop(char *c);
+
+The 'push' function should push the character 'c' onto top of the stack.
+It should return 1 on success, 0 on failure (ie, stack is full).
+
+The 'pop' function should decrement the top of the stack and store the top 
+most character in the stack in the pointer 'c'. It should return 1 on success,
+or 0 on failure (ie, stack is empty).
+
+You can compile and test using 'make test_stack'.
+
+[Note: The array and top-of-stack can be declared as globals for now]
+
+
+Exercise 3
+----------
+
+ *** YOU WILL HAVE TO FINISH THE PREVIOUS EXERCISE BEFORE WORKING ON THIS ***
+
+Create a file scan.c with the following C function.
+
+    int scan(const char *str);
+
+The string 'str' will consist of lower case characters [a-z] and single digit
+numbers [0-9] ONLY. The function should scan the string char by char. 
+Whenever a lower case character is encountered, it should push the character
+into the stack. Whenever it encounters a digit 'n', it should pop 'n' elements
+from the stack. Once all characters in the string has been scanned, the 
+function should return the number of elements in the stack. The number of 
+elements in the stack can be calculated from the position of the top of stack.
+
+The file scan.c should contain ONLY the 'scan' function.
+The make will reuse the push(), pop() already defined in stack.c. But if you 
+try to use push() and pop() without declaring their prototypes, the compiler 
+will give an error. Therefore, make sure you declare the prototypes as follows.
+
+extern int push(char c);
+extern int pop(char *c);
+
+The top of stack variable (also defined in stack.c) can also be used in scan.c
+by declaring its prototype along with the 'extern' keyword.
+
+You can compile and test using 'make test_scan'.
+
+Examples:
+    Input: str = "abcd3ab"
+    Output: 3
+
+    Input: str = "a1"
+    Output: 3 (stack had 3 elements in previous iteration)
+
+    Input: str = "abcdefgh2abcdefgh3ab"
+    Output: 16 (stack had 3 elements in previous iteration)
+
