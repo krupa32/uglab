@@ -10,7 +10,7 @@ The function takes an array 'arr' along with its size, and checks whether the
 numbers in the array occur at equal intervals. For example, the numbers
 1, 2, 3, 4, 5 occur at equal intervals of 1. The numbers 4, 7, 10, 13  occur
 at equal intervals of 3. The numbers 5, 7, 10, 12 DO NOT occur at equal
-intervals.
+intervals. You can assume the array is sorted in increasing order.
 
 The function should check each element of array and return 1 if all numbers
 in the array occur at equal intervals. It should return 0 otherwise.
@@ -79,8 +79,8 @@ Create a file scan.c with the following C function.
 
     int scan(const char *str);
 
-The string 'str' will consist of lower case characters [a-z] and single digit
-numbers [0-9] ONLY. The function should scan the string char by char. 
+The string 'str' will consist of lower case characters [a-z] and digits [0-9]
+ONLY. The function should scan the string char by char. 
 Whenever a lower case character is encountered, it should push the character
 into the stack. Whenever it encounters a digit 'n', it should pop 'n' elements
 from the stack. Once all characters in the string has been scanned, the 
