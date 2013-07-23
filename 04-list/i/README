@@ -1,0 +1,177 @@
+
+GENERAL INSTRUCTIONS
+--------------------
+
+The following exercises will require you to declare a structure and implement
+some functions using that structure.
+
+All structure declarations MUST be done in a .h header file.
+All function implementation MUST be done in a .c file, which #include's the
+corresponding .h header file.
+
+
+Exercise 1
+----------
+
+Create a file point.h with the following structure declaration.
+
+    struct point
+    {
+        int x;
+        int y;
+    };
+
+Create a file point.c which #includes the "point.h" file.
+Implement the following C function in point.c.
+
+    void move(struct point *p, int offx, int offy);
+
+The function should move the x, y, in point 'p' by offset 'offx' and 'offy'
+respectively.
+
+You can test by using 'make test_point'.
+
+Examples:
+    Input: p = { 0, 0 }, offx = 10, offy = 15
+    Output: p = { 10, 15 }
+
+    Input: p = { 10, 15 }, offx = -15, offy = 20
+    Output: p = { -5, 35 }
+
+
+Exercise 2
+----------
+
+Create a file record.h with the following structure.
+
+    #define MAX_NAME	25
+
+    struct record
+    {
+        int roll_num;
+        char name[MAX_NAME];
+        int mark;
+
+        struct record *next;
+    }
+
+Create a file record.c that implements the following C functions.
+
+    struct record *rec_alloc(int roll_num, const char *name, int mark);
+
+    void rec_free(struct record *p);
+
+    void rec_add(struct record *head, struct record *p);
+
+    struct record *rec_find(struct record *head, int roll_num);
+
+    void rec_remove(struct record *head, struct record *p);
+
+The 'rec_alloc' function should allocate a new record, fill the members 
+with given values and return the pointer to the record. If memory is not
+available, it may return NULL.
+
+The 'rec_free' function should free memory allocated for the record.
+
+The 'rec_add' function should add a record 'p' to the tail of the linked 
+list pointed by 'head'.
+
+The 'rec_find' should search for a record with 'roll_num' in the linked list
+with given 'head'. It should return the pointer to the record, or NULL if
+a record with given roll_num is not found.
+
+The 'rec_remove' function should remove the record 'p' from the linked list
+pointed by 'head'. Note that rec_remove MUST NOT free the record. It should
+ONLY remove/unlink the record from the list.
+
+You can test by using 'make test_record'.
+
+
+Exercise 3
+----------
+
+*** YOU HAVE TO FINISH EXERCISE 2 BEFORE PROCEEDING ***
+
+Create a file record_sorted.c, with the following function.
+
+    void rec_add_sorted(struct record *head, struct record *p);
+
+    void rec_reverse(struct record **head);
+
+The 'rec_add_sorted' function should add the record 'p' such that the list 
+always contains records in ascending order of roll number. That is, the list
+always contains records sorted on roll number.
+
+The 'rec_reverse' function should reverse the list in place (that is, no 
+new record should be allocated), and store the head of the reversed list
+back in the 'head' pointer. Note that 'head' is a double pointer, so that
+the reversed list head can be stored back.
+
+In case you are not able to reverse the list in place, you can try creating
+a new list in reverse order and return the head of this new reversed list.
+But this may be more difficult than reversing in place.
+
+
+
+Exercise 4
+----------
+
+*** YOU HAVE TO FINISH EXERCISE 2 BEFORE PROCEEDING ***
+
+There are two major drawbacks in using the above linked list implementation.
+
+1) 'malloc' takes time every time it is called
+2) 'malloc' may fail if there is no free memory
+
+To avoid these two problems, applications tend to follow the 'cache' design.
+
+A record cache is an array of struct record's. It is preallocated when an
+application initializes, and remains in memory as long as the application runs.
+
+After allocating a record cache, it has to be initialized. Initialization
+involves linking all the struct record elements of the array. Typically,
+every record element's next will point to the next element in the array.
+
+The record cache looks as follows.
+
+       arr[0]        arr[1]       arr[2]       arr[3]
+    -----------------------------------------------------
+    | ... | next | ... | next | ... | next | ... | next |
+    -----------------------------------------------------
+     ^       |    ^        |   ^        |   ^       |
+     |       |____|        |___|        |___|       --> NULL
+     |
+  cache 
+
+Allocating a record involves removing the head of the cache and returning it.
+
+Freeing a record involves adding the record to the head of the cache.
+
+Rest of the linked list functions (add, find, remove) work seamlessly without
+any modifications (from record.c).
+
+Create a file record_cache.c with the following C functions.
+
+    struct record *rec_cache_init(int num_records);
+
+    struct record *rec_alloc_from_cache(struct record **cache,
+			int roll_num, const char *name, int mark);
+
+    void rec_free_to_cache(struct record **cache, struct record *p);
+
+The 'rec_cache_init' function should allocate an array of struct records, of
+size 'num_records'. After that, it should initialize the array elements into
+a linked list. It should return the pointer to the first array element, which
+will be used as the cache head. If no memory available, it may return NULL.
+
+The 'rec_alloc_from_cache' removes the head of the given cache, and updates
+the cache to point to the next element. It fills in the given information,
+and returns the allocated element. It returns NULL if there are no records
+in the cache. Note that 'cache' is a double pointer.
+
+The 'rec_free_to_cache' adds the record 'p' to the head of the cache and
+updates cache to point to this new head. Note that 'cache' is a double pointer.
+
+You can test using 'make test_rec_cache'.
+
+
