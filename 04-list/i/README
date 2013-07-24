@@ -55,17 +55,22 @@ Create a file record.h with the following structure.
         struct record *next;
     }
 
+    struct list
+    {
+        struct record *head;
+    }
+
 Create a file record.c that implements the following C functions.
 
     struct record *rec_alloc(int roll_num, const char *name, int mark);
 
     void rec_free(struct record *p);
 
-    void rec_add(struct record *head, struct record *p);
+    void rec_add(struct list *l, struct record *p);
 
-    struct record *rec_find(struct record *head, int roll_num);
+    struct record *rec_find(struct list *l, int roll_num);
 
-    void rec_remove(struct record *head, struct record *p);
+    void rec_remove(struct list *l, struct record *p);
 
 The 'rec_alloc' function should allocate a new record, fill the members 
 with given values and return the pointer to the record. If memory is not
@@ -74,14 +79,14 @@ available, it may return NULL.
 The 'rec_free' function should free memory allocated for the record.
 
 The 'rec_add' function should add a record 'p' to the tail of the linked 
-list pointed by 'head'.
-
+list pointed by 'l'.
+ 
 The 'rec_find' should search for a record with 'roll_num' in the linked list
-with given 'head'. It should return the pointer to the record, or NULL if
+'l'. It should return the pointer to the record, or NULL if
 a record with given roll_num is not found.
 
 The 'rec_remove' function should remove the record 'p' from the linked list
-pointed by 'head'. Note that rec_remove MUST NOT free the record. It should
+'l'. Note that rec_remove MUST NOT free the record. It should
 ONLY remove/unlink the record from the list.
 
 You can test by using 'make test_record'.
@@ -94,24 +99,22 @@ Exercise 3
 
 Create a file record_sorted.c, with the following function.
 
-    void rec_add_sorted(struct record *head, struct record *p);
+    void rec_add_sorted(struct list *l, struct record *p);
 
-    void rec_reverse(struct record **head);
+    void rec_reverse(struct list *l);
 
 The 'rec_add_sorted' function should add the record 'p' such that the list 
 always contains records in ascending order of roll number. That is, the list
 always contains records sorted on roll number.
 
 The 'rec_reverse' function should reverse the list in place (that is, no 
-new record should be allocated), and store the head of the reversed list
-back in the 'head' pointer. Note that 'head' is a double pointer, so that
-the reversed list head can be stored back.
+new record should be allocated), and update the list's head pointer.
 
 In case you are not able to reverse the list in place, you can try creating
-a new list in reverse order and return the head of this new reversed list.
+a new list in reverse order and update the list's head with this new head.
 But this may be more difficult than reversing in place.
 
-
+You can test using 'make test_sorted'
 
 Exercise 4
 ----------
@@ -152,26 +155,26 @@ any modifications (from record.c).
 
 Create a file record_cache.c with the following C functions.
 
-    struct record *rec_cache_init(int num_records);
+    void rec_cache_init(struct list *cache, int num_records);
 
-    struct record *rec_alloc_from_cache(struct record **cache,
+    struct record *rec_alloc_from_cache(struct list *cache,
 			int roll_num, const char *name, int mark);
 
-    void rec_free_to_cache(struct record **cache, struct record *p);
+    void rec_free_to_cache(struct list *cache, struct record *p);
 
 The 'rec_cache_init' function should allocate an array of struct records, of
 size 'num_records'. After that, it should initialize the array elements into
-a linked list. It should return the pointer to the first array element, which
-will be used as the cache head. If no memory available, it may return NULL.
+a linked list. It should update cache's head to point to the first element of
+the array. If no memory available, it may return NULL.
 
-The 'rec_alloc_from_cache' removes the head of the given cache, and updates
-the cache to point to the next element. It fills in the given information,
-and returns the allocated element. It returns NULL if there are no records
-in the cache. Note that 'cache' is a double pointer.
+The 'rec_alloc_from_cache' removes the first node in the list, 
+and updates the list head to point to the next element. It fills in the given 
+information, and returns the allocated element. It returns NULL if there are 
+no records in the list.
 
-The 'rec_free_to_cache' adds the record 'p' to the head of the cache and
-updates cache to point to this new head. Note that 'cache' is a double pointer.
+The 'rec_free_to_cache' adds the record 'p' as first node in the list and
+updates head to point to this new node.
 
-You can test using 'make test_rec_cache'.
+You can test using 'make test_cache'.
 
 
