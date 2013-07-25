@@ -1,0 +1,195 @@
+
+GENERAL INSTRUCTIONS
+--------------------
+
+The following exercises will require you to declare a structure and implement
+some functions using that structure.
+
+All structure declarations MUST be done in a .h header file.
+All function implementation MUST be done in a .c file, which #include's the
+corresponding .h header file.
+
+
+Exercise 1
+----------
+
+Create a file point.h with the following structure declaration.
+
+    struct point
+    {
+        int x;
+        int y;
+    };
+
+Create a file point.c which #includes the "point.h" file.
+Implement the following C function in point.c.
+
+    int rect_area(struct point *p1, struct point *p2);
+
+The function should return the area of the rectangle formed by points 'p1'
+and 'p2'. You can assume the x,y values of p1 are ALWAYS lesser than the
+x,y values of p2.
+
+You can test by using 'make test_point'.
+
+Examples:
+    Input: p1 = { 0, 0 }, p2 = { 10, 10 }
+    Output: 100
+
+    Input: p1 = { 10, 15 }, p2 = { 15, 20 }
+    Output: 25
+
+
+Exercise 2
+----------
+
+Create a file record.h with the following structure.
+
+    #define MAX_NAME	25
+
+    struct record
+    {
+        int roll_num;
+        char name[MAX_NAME];
+        int mark;
+
+        struct record *next;
+    }
+
+    struct list
+    {
+        struct record *head;
+    }
+
+Create a file record.c that implements the following C functions.
+
+    struct record *rec_alloc(int roll_num, const char *name, int mark);
+
+    void rec_free(struct record *p);
+
+    void rec_add(struct list *l, struct record *p);
+
+    struct record *rec_find(struct list *l, int roll_num);
+
+    void rec_remove(struct list *l, struct record *p);
+
+The 'rec_alloc' function should allocate a new record, fill the members 
+with given values and return the pointer to the record. If memory is not
+available, it may return NULL.
+
+The 'rec_free' function should free memory allocated for the record.
+
+The 'rec_add' function should add a record 'p' to the tail of the linked 
+list pointed by 'l'.
+ 
+The 'rec_find' should search for a record with 'roll_num' in the linked list
+'l'. It should return the pointer to the record, or NULL if
+a record with given roll_num is not found.
+
+The 'rec_remove' function should remove the record 'p' from the linked list
+'l'. Note that rec_remove MUST NOT free the record. It should
+ONLY remove/unlink the record from the list.
+
+You can test by using 'make test_record'.
+
+
+Exercise 3
+----------
+
+*** YOU HAVE TO FINISH EXERCISE 2 BEFORE PROCEEDING ***
+
+Create a file record_before.c, with the following function.
+
+    void rec_insert_before(struct list *l, 
+             struct record *reference, struct record *rec);
+
+The function should insert the record 'rec' BEFORE the reference record 
+pointed by 'reference'.
+
+
+CIRCULAR DOUBLY LINKED LIST
+---------------------------
+
+A doubly linked list has a 'prev' and 'next' pointer which point to the 
+previous and next node, respectively. In such a list, head->prev and tail->next
+are NULL (assume tail points to the last node).
+
+A circular doubly linked list is similar to the doubly linked with a small
+change: head->prev points to the tail, and tail->next points to the head.
+
+Circular doubly linked list are generally implemented by using a 'dummy' node
+that represents the list. The dummy node lies exactly between the tail and the
+head. That is, dummy->next points to head, and head->prev points to dummy.
+Similarly, dummy->prev points to tail, and tail->next points to dummy.
+
+    -------------------------------------------
+    |                                         |
+    --->       --->   --->   --->   --->   ----
+         dummy      1      2      3      4
+    ----       <---   <---   <---   <---   <---
+    |                                         |
+    -------------------------------------------
+
+
+The circular doubly linked list is ALWAYS referred to by passing pointer to
+the dummy node. Even though it might like the dummy node wastes some memory,
+it greatly helps in writing a clean and easy implementation of the list.
+
+Note that to traverse the list, you can start from dummy->next (which is the
+first node), and loop until 'dummy' is encountered (which means one cycle is
+completed and you reached the dummy node again).
+
+Exercise 4
+----------
+
+Create a header file cdrecord.h with the following structure declaration.
+
+    #define MAX_NAME	25
+
+    struct cdrecord
+    {
+        int roll_num;
+        char name[MAX_NAME];
+        int mark;
+
+        struct record *prev;
+        struct record *next;
+    }
+
+Note that there is no 'struct list' here because we will be using a dummy
+record to represent the list.
+
+Create a file cdrecord.c with the following functions.
+
+    void cdlist_init(struct cdrecord *l);
+
+    struct cdrecord *cdrec_alloc(int roll_num, const char *name, int mark);
+
+    void cdrec_add_head(struct cdrecord *l, struct cdrecord *rec);
+    void cdrec_add_tail(struct cdrecord *l, struct cdrecord *rec);
+
+    struct cdrecord *cdrec_find(struct cdrecord *l, int roll_num);
+
+    void cdrec_remove(struct cdrecord *l, struct cdrecord *rec);
+
+
+The function 'cdlist_init' will initialize the record 'l' as a circular
+doubly linked list dummy node. It does this by pointing both prev and next
+of the record to itself. Therefore, when the list is empty, 
+    l->prev == l->next == l
+
+The function 'cdrec_alloc' will allocate a record and fill its contents.
+
+The function 'cdrec_add_head' and 'cdrec_add_tail' will add the given record
+to the head or tail of the list, respectively.
+
+The function 'cdrec_find' will search for a record with 'roll_num'. Note that
+when traversing the list, you can start from l->next (which is the first node),
+and loop until you encounter 'l' again (ie, you have completed a cycle and 
+reached the dummy node again).
+
+The function 'cdrec_remove' will remove 'rec' from the list.
+
+You can test using 'make test_cdrecord'.
+
+
