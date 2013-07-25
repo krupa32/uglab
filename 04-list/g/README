@@ -1,0 +1,155 @@
+
+GENERAL INSTRUCTIONS
+--------------------
+
+The following exercises will require you to declare a structure and implement
+some functions using that structure.
+
+All structure declarations MUST be done in a .h header file.
+All function implementation MUST be done in a .c file, which #include's the
+corresponding .h header file.
+
+
+Exercise 1
+----------
+
+Create a file point.h with the following structure declaration.
+
+    struct point
+    {
+        int x;
+        int y;
+    };
+
+Create a file point.c which #includes the "point.h" file.
+Implement the following C function in point.c.
+
+    int same(struct point *p1, struct point *p2);
+
+The function should check if point 'p1' and point 'p2' are same. The two points
+are same only if x and y of both the points are equal. The function should
+return 1 if the points are equal, 0 otherwise.
+
+You can test by using 'make test_point'.
+
+Examples:
+    Input: p1 = { 0, 10 }, p2 = { 0, 10 }
+    Output: 1
+
+    Input: p1 = { 10, 15 }, p2 = { 10, 14 }
+    Output: 0
+
+
+Exercise 2
+----------
+
+Create a file record.h with the following structure.
+
+    #define MAX_NAME	25
+
+    struct record
+    {
+        int roll_num;
+        char name[MAX_NAME];
+        int mark;
+
+        struct record *next;
+    }
+
+    struct list
+    {
+        struct record *head;
+    }
+
+Create a file record.c that implements the following C functions.
+
+    struct record *rec_alloc(int roll_num, const char *name, int mark);
+
+    void rec_free(struct record *p);
+
+    void rec_add(struct list *l, struct record *p);
+
+    struct record *rec_find(struct list *l, int roll_num);
+
+    void rec_remove(struct list *l, struct record *p);
+
+The 'rec_alloc' function should allocate a new record, fill the members 
+with given values and return the pointer to the record. If memory is not
+available, it may return NULL.
+
+The 'rec_free' function should free memory allocated for the record.
+
+The 'rec_add' function should add a record 'p' to the tail of the linked 
+list pointed by 'l'.
+ 
+The 'rec_find' should search for a record with 'roll_num' in the linked list
+'l'. It should return the pointer to the record, or NULL if
+a record with given roll_num is not found.
+
+The 'rec_remove' function should remove the record 'p' from the linked list
+'l'. Note that rec_remove MUST NOT free the record. It should
+ONLY remove/unlink the record from the list.
+
+You can test by using 'make test_record'.
+
+
+Exercise 3
+----------
+
+*** YOU HAVE TO FINISH EXERCISE 2 BEFORE PROCEEDING ***
+
+Create a file record_rotate.c, with the following function.
+
+    void rec_rotate(struct list *l, int direction);
+
+The 'rec_rotate' function should rotate the linked list nodes in the given
+direction. If 'direction' is 1, left rotate is done, and if 2, right
+rotation is done. Left rotation means the head node is removed and moved to
+the tail, and right rotation means the tail node is removed and moved to the
+head.
+
+Hint: You may reuse the rec_remove and rec_add functions you had written
+previously. If you are reusing those functions, make sure you declare them
+as extern functions in record_rotate.c before reusing them.
+
+You can test using 'make test_rotate'
+
+
+CACHE USING LINKED LIST
+-----------------------
+
+A cache is a hardware/software construct that makes sure the most recently 
+used element can be retrieved as quickly as possible. For example, a browser
+caches the recently visited web sites, processors maintain different levels of
+cache like L1, L2, L3 etc.
+
+A linked list can be used as a cache. The cache linked list maintains a list
+of nodes such that each node is ALWAYS added to the head of the list (assuming
+it will be accessed soon). Also, whenever a node is searched and found in the
+list, that node will be removed from its current position, and inserted as the
+head of the list. This way, the next time the same node is searched, it will
+return very quickly.
+
+
+Exercise 4
+----------
+
+*** YOU HAVE TO FINISH EXERCISE 2 BEFORE PROCEEDING ***
+
+Create a file record_cache.c with the following functions.
+
+    void rec_add_and_cache(struct list *l, struct record *p);
+
+    struct record *rec_find_and_cache(struct list *l, int roll_num);
+
+
+The 'rec_add_and_cache' function should add the record 'p' to the head of the
+list 'l'.
+
+The 'rec_find_and_cache' should search for a record with 'roll_num' in the list
+'l'. If found, it should return the pointer to the record, otherwise it should
+return NULL. Also, if a record is found, it should remove the record and make
+insert it in the head of the list.
+
+You can test by using 'make test_cache'.
+
