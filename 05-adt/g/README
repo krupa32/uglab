@@ -1,0 +1,123 @@
+
+ABSTRACT DATA TYPES
+-------------------
+
+An abstract data type (ADT)is one that is defined ONLY by the operations 
+that may be performed on it. Typically, an ADT exports ONLY a set of 
+interfaces/methods/functions. The details of how those interfaces are
+implemented are completely hidden to the user of the ADT.
+
+For example, an abstract stack data type may be defined using the push and
+pop operations. But a stack may be implemented using an array or linked list
+or some other data structure. But that is irrelevant to the user of the stack
+ADT. The same is true for a queue ADT also.
+
+In general, an abstract data type is not instantiable. That is, the user does
+not typically allocate memory or object of an ADT. Instead, the user always
+allocates memory/object of a 'derived' or 'concrete' data type which 
+'implements' the operations of the ADT. For example, a 'arraystack' is a
+derived or concrete implementation of a stack ADT, and users typically
+create only objects of type arraystack.
+
+
+
+DEFINING ABSTRACT DATA TYPES
+----------------------------
+
+Since ADTs are defined only using the operations it exports, it is defined
+by creating a header file which declares the prototypes of these operations.
+
+
+GENERAL INSTRUCTIONS
+--------------------
+
+For this session, you will be defining an abstract stack data type with the
+following operations. Create a file stack.h which declares the following
+operations of the stack ADT.
+
+    void * stack_create(int size);
+
+    void stack_free(void *stack);
+
+    int stack_push(void *stack, char c);
+
+    int stack_pop(void *stack, char *c);
+
+    int stack_empty(void *stack);
+
+    int stack_full(void *stack);
+
+The function 'stack_create' creates a character stack of 'size' characters and 
+returns a pointer which can be used to reference that stack. The user can
+create multiple stacks and uses this pointer to perform operations on the
+corresponding stack. The return value of 'void *' ensures that the user of
+the ADT does not know what data structure is used by the implementation.
+You will get a better idea about the returned pointer once you read exercise 1.
+
+The function 'stack_push' and 'stack_pop' are similar to the push and pop
+you have implemented as part of 03-stack session. That is, stack_push will
+push the character and return 1, or return 0 if stack is full. And stack_pop
+should pop topmost character in stack and return 1, or return 0 if stack
+is empty.
+
+The functions 'stack_empty' and 'stack_full' return 1 depending on
+whether the stack is empty or full. Otherwise it returns 0.
+
+
+Exercise 1
+----------
+
+Create a file arraystack.h that declares the following structure.
+
+    struct arraystack
+    {
+        char *arr;
+        int size;
+        int top;
+    };
+
+Create a file arraystack.c which includes "stack.h" and "arraystack.h".
+The file should implement all stack ADT operations using the 'arraystack'
+structure to represent the stack.
+
+The function 'stack_create' should malloc a struct arraystack and return the
+pointer. In addition, it should also malloc 'size' characters and assign to
+'arr', and initialize top to 0.
+
+The function 'stack_free' should free the memory allocated for 'arr', and
+then free the memory allocated for the struct arraystack.
+
+The functions 'stack_push' and 'stack_pop' can typecast the 'void *stack' to
+'struct arraystack *' and implement the stack operations.
+
+You can test using 'make test_arraystack'.
+
+
+Exercise 2
+----------
+
+*** YOU HAVE TO FINISH EXERCISE 1 BEFORE PROCEEDING ***
+
+Create a file clone.c with the following function.
+
+    void *stack_clone(void *stack);
+
+The function should create a clone of the given stack. That is, it should
+create a new stack which is an exact copy of the given stack, and return
+the pointer to the new stack. Also, when the function returns, the contents
+of stack should be intact.
+
+Since the internal implementation of the stack is not known, the way to do 
+this is as follows.
+
+Create two new stacks: 'tmp' and 'clone'. First pop all characters from stack
+and push to tmp. Then pop all characters from tmp and push to stack and clone.
+Now both stack and clone have the same elements.
+
+You can include "stack.h" and use the stack ADT operations. The arraystack.c
+will automatically be linked by the make. You can assume the size of
+the given stack is 100.
+
+You can test using 'make test_clone'.
+
+
