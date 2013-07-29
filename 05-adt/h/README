@@ -1,4 +1,23 @@
 
+Exercise 1
+----------
+
+Create a file ex1.c with the following declarations and functions.
+
+    struct node
+    {
+        int num;
+        struct node *next;
+    };
+
+    struct node *get_prev(struct node *head, struct node *n);
+
+The function should search the linked list for node 'n', and return the node
+that is BEFORE node 'n'.
+
+You can test using 'make test_ex1'.
+
+
 ABSTRACT DATA TYPES
 -------------------
 
@@ -25,106 +44,112 @@ DEFINING ABSTRACT DATA TYPES
 ----------------------------
 
 Since ADTs are defined only using the operations it exports, it is defined
-by creating a header file which declares the prototypes of these operations.
+by creating ONLY a header file which declares the prototypes of these 
+operations.
 
 
 GENERAL INSTRUCTIONS
 --------------------
 
-For this session, you will be defining an abstract stack data type with the
-following operations. Create a file stack.h which declares the following
-operations of the stack ADT.
+For this session, you will be defining an abstract queue data type with the
+following operations. Create a file queue.h which declares the following
+operations of the queue ADT.
 
-    void * stack_create(int size);
+    void * queue_create(void);
 
-    void stack_free(void *stack);
+    void queue_free(void *queue);
 
-    int stack_push(void *stack, char c);
+    int queue_insert(void *queue, char c);
 
-    int stack_pop(void *stack, char *c);
+    int queue_remove(void *queue, char *c);
 
-    int stack_empty(void *stack);
+    int queue_empty(void *queue);
 
-    int stack_full(void *stack);
-
-The function 'stack_create' creates a character stack of 'size' characters and 
-returns a pointer which can be used to reference that stack. The user can
-create multiple stacks and uses this pointer to perform operations on the
-corresponding stack. The return value of 'void *' ensures that the user of
+The function 'queue_create' creates a character queue and 
+returns a pointer which can be used to reference that queue. The user can
+create multiple queues and uses this pointer to perform operations on the
+corresponding queue. The return value of 'void *' ensures that the user of
 the ADT does not know what data structure is used by the implementation.
 You will get a better idea about the returned pointer once you read exercise 1.
 
-The function 'stack_push' and 'stack_pop' are similar to the push and pop
-you have implemented as part of 03-stack session. That is, stack_push will
-push the character and return 1, or return 0 if stack is full. And stack_pop
-should pop topmost character in stack and return 1, or return 0 if stack
-is empty.
+The function 'queue_insert' should insert 'c' to the end of the queue as the
+last character in the queue. It returns 1 on success, 0 on failure if there
+is no more space in the queue.
 
-The functions 'stack_empty' and 'stack_full' return 1 depending on
-whether the stack is empty or full. Otherwise it returns 0.
+The 'queue_remove' should remove the first character in the queue and
+store in the address pointer by 'c'.
 
-
-Exercise 1
-----------
-
-Create a file arraystack.h that declares the following structure.
-
-    struct arraystack
-    {
-        char *arr;
-        int size;
-        int top;
-    };
-
-Create a file arraystack.c which includes "stack.h" and "arraystack.h".
-The file should implement all stack ADT operations using the 'arraystack'
-structure to represent the stack.
-
-The function 'stack_create' should malloc a struct arraystack and return the
-pointer. In addition, it should also malloc 'size' characters and assign to
-'arr', and initialize top to 0.
-
-The function 'stack_free' should free the memory allocated for 'arr', and
-then free the memory allocated for the struct arraystack.
-
-The functions 'stack_push' and 'stack_pop' can typecast the 'void *stack' to
-'struct arraystack *' and implement the stack operations.
-
-You can test using 'make test_arraystack'.
+The functions 'queue_empty' return 1 if queue is empty, or 0 otherwise.
 
 
 Exercise 2
 ----------
 
-*** YOU HAVE TO FINISH EXERCISE 1 BEFORE PROCEEDING ***
+Create a file arrayqueue.h that declares the following structure.
 
-Create a file palindrome.c with the following function.
+    #define QUEUE_MAX_SIZE 100
 
-    void *stack_is_palindrome(void *stack);
+    struct arrayqueue
+    {
+        char arr[QUEUE_MAX_SIZE];
+        int tail;
+    };
 
-The function should check if the characters in the stack form a palindrome.
-it returns 1 if the stack contained a palindrome, or 0 otherwise.
+Note that since an array has a limited size, the queue has a maximum size
+defined.
 
-A palindrome is a sequence of characters where the second half is a mirror
-of the first half. Example, malayalam is a palindrome.
+Create a file arrayqueue.c which includes "queue.h" and "arrayqueue.h".
+The file should implement all queue ADT operations using the 'arrayqueue'
+structure to represent the queue.
 
-Since the stack ADT implementation details are hidden, the way to do this
-is as follows. Create another stack called tmp. Now pop all characters from 
-stack and push to tmp, and count the number of characters pushed. Now you know
-the total number of characters in the stack. Now pop exactly half the number
-of characters from tmp and push to stack. Now you have stack and tmp with
-the bottom and top half of the characters, respectively. Now you can compare
-the contents of both the stacks. If they are equal, then original stack
-contained a palindrome.
+The function 'queue_create' should malloc a struct arrayqueue and return the
+pointer. It should also set tail to 0.
 
-Comparing two stacks is done as follows. Pop one char at a time from both the
-stacks. If the characters do not match, or if one stack becomes empty, then
-the stacks are not equal. If all characters match, then the stacks are equal.
+The function 'queue_free' should free the memory allocated for the struct 
+arrayqueue.
 
-You can include "stack.h" and use the stack ADT operations. The arraystack.c
-will automatically be linked by the make. You can assume the size of
-the given stack is 100.
+The functions 'queue_insert' and 'queue_remove' can typecast the 'void *queue' 
+to 'struct arrayqueue *' and implement the queue operations.
 
-You can test using 'make test_palindrome'.
+The function 'queue_empty' should return 1 if queue is empty, 0 otherwise.
+
+You can test using 'make test_arrayqueue'.
+
+
+Exercise 3
+----------
+
+Create a file listqueue.h that declares the following structure.
+
+    struct node
+    {
+        char c;
+        struct node *next;
+    };
+
+    struct listqueue
+    {
+        struct node *head;
+    };
+
+Note that since a linked list does not have any size limitation, there is
+no maximum queue size defined.
+
+Create a file listqueue.c which includes "queue.h" and "listqueue.h".
+The file should implement all queue ADT operations using the 'listqueue'
+structure to represent the queue.
+
+The function 'queue_create' should malloc a struct listqueue and return the
+pointer. It should also set head to NULL.
+
+The function 'queue_free' should traverse the linked list and free all the
+nodes. Finally it should free the memory allocated for the struct listqueue.
+
+The functions 'queue_insert' and 'queue_remove' can typecast the 'void *queue' 
+to 'struct listqueue *' and implement the queue operations.
+
+The function 'queue_empty' should return 1 if queue is empty, or 0 otherwise.
+
+You can test using 'make test_listqueue'.
 
 

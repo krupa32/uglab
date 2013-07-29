@@ -1,4 +1,24 @@
 
+Exercise 1
+----------
+
+Create a file ex1.c with the following declarations and functions.
+
+    struct node
+    {
+        int num;
+        struct node *next;
+    };
+
+    struct node *find(struct node *head, int num);
+
+The function 'find' should search the linked list with given 'head' for a node
+with given 'num'. It returns the node pointer if found, or NULL if no node
+exists with given num.
+
+You can test using 'make test_ex1'.
+
+
 ABSTRACT DATA TYPES
 -------------------
 
@@ -25,102 +45,143 @@ DEFINING ABSTRACT DATA TYPES
 ----------------------------
 
 Since ADTs are defined only using the operations it exports, it is defined
-by creating a header file which declares the prototypes of these operations.
+by creating ONLY a header file which declares the prototypes of these 
+operations.
+
+
+LIST - ABSTRACT DATA TYPE
+-------------------------
+
+A 'list' is an abstract data type that represents a list of items. Consider
+a character list that represents a list of characters. The list is abstract
+because it can be implemented using an array or a linked list.
+
+Do not confuse the 'list' ADT with a linked list. A linked list is a concrete
+implementation. A 'list' ADT can be implemented using a linked list.
+
+The operations exported by a 'list' ADT are: insert, remove, get, set etc.
 
 
 GENERAL INSTRUCTIONS
 --------------------
 
-For this session, you will be defining an abstract stack data type with the
-following operations. Create a file stack.h which declares the following
-operations of the stack ADT.
+For this session, you will be defining an abstract list data type with the
+following operations. Create a file list.h which declares the following
+operations of the list ADT.
 
-    void * stack_create(int size);
+    void * list_create(void);
 
-    void stack_free(void *stack);
+    void list_free(void *list);
 
-    int stack_push(void *stack, char c);
+    int list_insert(void *list, int pos, char c);
 
-    int stack_pop(void *stack, char *c);
+    void list_remove(void *list, int pos);
 
-    int stack_empty(void *stack);
+    char list_get(void *list, int pos);
 
-    int stack_full(void *stack);
+    void list_set(void *list, int pos, char c);
 
-The function 'stack_create' creates a character stack of 'size' characters and 
-returns a pointer which can be used to reference that stack. The user can
-create multiple stacks and uses this pointer to perform operations on the
-corresponding stack. The return value of 'void *' ensures that the user of
+    int list_count(void *list);
+
+
+The function 'list_create' creates a character list and
+returns a pointer which can be used to reference that list. The user can
+create multiple lists and uses this pointer to perform operations on the
+corresponding list. The return value of 'void *' ensures that the user of
 the ADT does not know what data structure is used by the implementation.
 You will get a better idea about the returned pointer once you read exercise 1.
 
-The function 'stack_push' and 'stack_pop' are similar to the push and pop
-you have implemented as part of 03-stack session. That is, stack_push will
-push the character and return 1, or return 0 if stack is full. And stack_pop
-should pop topmost character in stack and return 1, or return 0 if stack
-is empty.
+The 'list_free' frees the memory allocated for the list.
 
-The functions 'stack_empty' and 'stack_full' return 1 depending on
-whether the stack is empty or full. Otherwise it returns 0.
+The 'list_insert' inserts the character 'c' BEFORE the character at position 
+'pos'.
 
+The 'list_remove' removes the character at position 'pos'.
 
-Exercise 1
-----------
+The 'list_get' returns the character at position 'pos'. If 'pos' is invalid,
+it returns 0.
 
-Create a file arraystack.h that declares the following structure.
-
-    struct arraystack
-    {
-        char *arr;
-        int size;
-        int top;
-    };
-
-Create a file arraystack.c which includes "stack.h" and "arraystack.h".
-The file should implement all stack ADT operations using the 'arraystack'
-structure to represent the stack.
-
-The function 'stack_create' should malloc a struct arraystack and return the
-pointer. In addition, it should also malloc 'size' characters and assign to
-'arr', and initialize top to 0.
-
-The function 'stack_free' should free the memory allocated for 'arr', and
-then free the memory allocated for the struct arraystack.
-
-The functions 'stack_push' and 'stack_pop' can typecast the 'void *stack' to
-'struct arraystack *' and implement the stack operations.
-
-You can test using 'make test_arraystack'.
+The 'list_set' replaces character at position 'pos' with 'c'. If 'pos' is
+invalid, nothing is done.
 
 
 Exercise 2
 ----------
 
-*** YOU HAVE TO FINISH EXERCISE 1 BEFORE PROCEEDING ***
+Create a file arraylist.h that declares the following structure.
 
-Create a file compare.c with the following function.
+    #define LIST_MAX_SIZE 100
 
-    int stack_compare(void *stack1, void *stack2);
+    struct arraylist
+    {
+        char arr[LIST_MAX_SIZE];
+        int count;
+    };
 
-The function should compare the elements of both the stacks and return 1
-if the elements are same, and return 0 otherwise. Also, when the function
-returns, the contents of stack1 and stack2 should be intact.
+Note that since an array has a limited size, the list has a maximum size
+defined.
 
-Since the stack ADT does not reveal the implementation details of the stack,
-the way to do this is as follows. Create a new stack called tmp. Pop one
-element from stack1 and stack2 repeatedly. If the elements are different,
-then restore stack1 and stack2, and return 0. If the elements are same,
-then push the character to tmp stack and continue the loop.
+Create a file arraylist.c which includes "list.h" and "arraylist.h".
+The file should implement all list ADT operations using the 'arraylist'
+structure to represent the list.
 
-By the nature of the algorithm, tmp stack contains characters that are common
-in both stack1 and stack2. Restoring stack1 and stack2 involves popping 
-a character in tmp_stack, and pushing it to both stack1 and stack2. And this
-is done repeatedly until tmp stack is empty.
+The function 'list_create' should malloc a struct arraylist and return the
+pointer.
 
-You can include "stack.h" and use the stack ADT operations. The arraystack.c
-will automatically be linked by the make. You can assume the size of
-the given stack is 100.
+The function 'list_free' should free the memory allocated for the struct
+arraylist.
 
-You can test using 'make test_compare'.
+The 'list_insert' should first move all characters beyond 'pos' by one position
+down. It should then set the character at 'pos' to 'c'. The function should
+return 1 if insert was succesful, or 0 if insert failed as the list is full,
+ie there is already LIST_MAX_SIZE characters in the list.
+
+The 'list_remove' should move all characters beyond 'pos' by one position up.
+
+The 'list_get' and 'list_set' are straight forward get and set functions,
+and 'list_count' should return the number of characters currently in the list.
+
+You can test using 'make test_arraylist'.
+
+
+Exercise 3
+----------
+
+Create a file linkedlist.h that declares the following structure.
+
+    strut node
+    {
+        char c;
+        struct node *next;
+    };
+
+    struct linkedlist
+    {
+        struct node *head;
+    };
+
+Note that since a linked list does not have any size limitation, there is
+no maximum list size defined.
+
+Create a file linkedlist.c which includes "list.h" and "linkedlist.h".
+The file should implement all list ADT operations using the 'linkedlist'
+structure to represent the list.
+
+The function 'list_create' should malloc a struct linkedlist and return the
+pointer. It should also initialize the head to NULL.
+
+The function 'list_free' should traverse the linked list of nodes, and free all
+nodes. It should then free the memory allocated for the struct linkedlist.
+
+The 'list_insert' should create a new node and insert it before the node at
+'pos'. It returns 1 on success, and 0 if insert failed due to memory
+allocation failure.
+ 
+The 'list_remove' should remove the node at position 'pos', and free the node.
+
+The 'list_get' and 'list_set' are straight forward get and set functions,
+and 'list_count' should return the number of characters currently in the list.
+
+You can test using 'make test_linkedlist'.
 
 
