@@ -70,7 +70,7 @@ returns a pointer which can be used to reference that stack. The user can
 create multiple stacks and uses this pointer to perform operations on the
 corresponding stack. The return value of 'void *' ensures that the user of
 the ADT does not know what data structure is used by the implementation.
-You will get a better idea about the returned pointer once you read exercise 1.
+You will get a better idea about the returned pointer once you read exercise 2.
 
 The function 'stack_push' and 'stack_pop' are similar to the push and pop
 you have implemented as part of 03-stack session. That is, stack_push will

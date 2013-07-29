@@ -70,7 +70,7 @@ returns a pointer which can be used to reference that queue. The user can
 create multiple queues and uses this pointer to perform operations on the
 corresponding queue. The return value of 'void *' ensures that the user of
 the ADT does not know what data structure is used by the implementation.
-You will get a better idea about the returned pointer once you read exercise 1.
+You will get a better idea about the returned pointer once you read exercise 2.
 
 The function 'queue_insert' should insert 'c' to the end of the queue as the
 last character in the queue. It returns 1 on success, 0 on failure if there
