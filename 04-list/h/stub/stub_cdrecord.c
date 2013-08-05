@@ -7,8 +7,8 @@ struct cdrecord
         char name[MAX_NAME];
         int mark;
 
-        struct cdrecord *next;
 	struct cdrecord *prev;
+        struct cdrecord *next;
 };
 
 extern void cdlist_init(struct cdrecord *l);
@@ -64,6 +64,8 @@ int main()
 	printf("\n adding severa&l records to head...");
 	rec = cdrec_alloc(102,"Anu",80);
 	cdrec_add_head(&l, rec);
+	if(l.next != rec || rec->prev != &l)
+		goto fail;
 	
 	rec = cdrec_alloc(103,"Ba&lu",85);
 	cdrec_add_head(&l, rec);
