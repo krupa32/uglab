@@ -1,0 +1,70 @@
+
+Exercise 1
+----------
+
+Create a file list.h with the following declarations.
+
+    struct node
+    {
+        char c;
+        struct node *next;
+    };
+
+    struct list
+    {
+        struct node *head;
+    };
+    
+    struct list * list_create(void);
+
+    void list_free(struct list *l);
+
+    void list_add_head(struct list *l, struct node *n);
+
+    void list_add_tail(struct list *l, struct node *n);
+
+    void list_del(struct list *l, struct node *n);
+
+
+Create a file list.c that implements the functions declared above.
+
+You can test using 'make test_list'.
+
+
+Exercise 2
+----------
+
+Create a file queue.h with the following declarations.
+
+    void * queue_create(void);
+
+    void queue_free(void *queue);
+
+    int queue_insert(void *queue, char c);
+
+    int queue_remove(void *queue, char *c);
+
+    int queue_empty(void *queue);
+
+
+Create a file queue.c which includes "list.h" and implements the above 
+functions.
+
+You can test by using the following commands.
+
+    $ gcc list.c queue.c stub_queue.o -o test_queue
+    $ ./test_queue
+
+
+
+Exercise 3
+----------
+
+Add rules for the target 'test_queue' in the Makefile.
+
+Remember the rule should generate the intermediate .o's before building the
+executable 'test_queue'. You can take a look at the previous session Makefiles
+for some guidance.
+
+You can test by using 'make test_queue'.
+
