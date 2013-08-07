@@ -46,9 +46,23 @@ Create a file queue.h with the following declarations.
 
     int queue_empty(void *queue);
 
+The 'queue_insert' function should insert 'c' into the queue.
+
+The 'queue_remove' function should store the character removed from the queue
+in the character pointer passed as parameter.
+
+The 'queue_empty' function should return 1 if the queue is empty, 0 otherwise.
 
 Create a file queue.c which includes "list.h" and implements the above 
-functions.
+functions. DO NOT implement any list functions again. You have to REUSE
+the list functions implemented above.
+
+For example, you can declare your queue as follows.
+
+    struct list *queue;
+
+You can allocate/use this structure to represent a queue, and typecast to
+this structure the 'void *' received in the queue_XXX functions.
 
 You can test by using the following commands.
 
