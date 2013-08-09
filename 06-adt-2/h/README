@@ -1,0 +1,86 @@
+
+Exercise 1
+----------
+
+Create a file list.h with the following declarations.
+
+    struct node
+    {
+        char c;
+        struct node *next;
+    };
+
+    struct list
+    {
+        struct node *head;
+    };
+
+    struct node * node_create(char c);
+    
+    struct list * list_create(void);
+
+    void list_free(struct list *l);
+
+    void list_add_head(struct list *l, struct node *n);
+
+    void list_del(struct list *l, struct node *n);
+
+    struct list_find(struct list *l, char c);
+
+
+Create a file list.c that implements the functions declared above.
+
+You can test using 'make test_list'.
+
+
+Exercise 2
+----------
+
+Create a file stack.h with the following declarations.
+
+    void * stack_create(void);
+
+    void stack_free(void *stack);
+
+    int stack_push(void *stack, char c);
+
+    int stack_pop(void *stack, char *c);
+
+    int stack_empty(void *stack);
+
+The 'stack_insert' function should push 'c' into the stack.
+
+The 'stack_pop' function should store the character popped from the stack
+in the character pointer passed as parameter.
+
+The 'stack_empty' function should return 1 if the stack is empty, 0 otherwise.
+
+Create a file stack.c which includes "list.h" and implements the above stack
+functions. DO NOT implement any list functions again. You have to REUSE
+the list functions implemented in the previous exercise.
+
+For example, you can declare your stack as follows.
+
+    struct list *stack;
+
+You can allocate/use this structure to represent a stack, and typecast to
+this structure the 'void *' received in the stack_XXX functions.
+
+You can test by using the following commands.
+
+    $ gcc list.c stack.c stub_stack.o -o test_stack
+    $ ./test_stack
+
+
+
+Exercise 3
+----------
+
+Add rules for the target 'test_stack' in the Makefile.
+
+Remember the rule should generate the intermediate .o's before building the
+executable 'test_stack'. You can take a look at the previous session Makefiles
+for some guidance.
+
+You can test by using 'make test_stack'.
+
