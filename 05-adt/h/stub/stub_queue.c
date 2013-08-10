@@ -10,7 +10,7 @@ int main()
 	if(queue == NULL)
 	{
 		printf("\n queue not created...\n");
-		goto out;
+		goto fail;
 	}
 	else
 		printf("[ok]\n");

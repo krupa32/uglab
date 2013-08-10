@@ -1,7 +1,7 @@
 
 CFLAGS += -Wall
 
-ex1: stub1.o ex1.o
+ex1: stub_ex1.o ex1.o
 	gcc $^ -o $@
 
 arrayqueue: stub_queue.o arrayqueue.o
