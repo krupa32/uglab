@@ -48,7 +48,7 @@ Create a file stack.h with the following declarations.
 
     int stack_empty(void *stack);
 
-The 'stack_insert' function should push 'c' into the stack.
+The 'stack_push' function should push 'c' into the stack.
 
 The 'stack_pop' function should store the character popped from the stack
 in the character pointer passed as parameter.
