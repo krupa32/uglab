@@ -1,0 +1,137 @@
+
+Hello Object World!
+
+From this session onwards, problems will be solved using object oriented
+programming in C++.
+
+Exercise 1
+----------
+
+Create a file string.cpp with the following class AND its implementation.
+
+    #define MAX_LEN    100
+
+    class String
+    {
+        char data[MAX_LEN];
+
+    public:
+        String();
+        String(const char *s);
+
+        String duplicate(void);
+    };
+
+The String() constructor should initialize 'data' to an empty string.
+
+The String(const char *s) constructor should copy 's' into 'data'.
+
+The 'duplicate' function should create another String object which is an
+exact copy of this object, and return it.
+
+You can test using 'make test_string'.
+
+
+Exercise 2
+----------
+
+Create a file simplestack.h with the following class declaration.
+
+    #define MAX_ELEMENTS    100
+
+    class SimpleStack
+    {
+        char arr[MAX_ELEMENTS];
+        int top;
+
+    public:
+        SimpleStack();
+
+        int push(char c);
+        int pop(char *c);
+        int empty(void);
+    }
+
+The 'push' function should push 'c' onto the stack. It should return 1 on 
+success, 0 otherwise (in case stack is full).
+
+The 'pop' function should pop the topmost character in stack and store it
+in 'c'. It should return 1 on success, 0 otherwise (stack is empty).
+
+The 'empty' function should return 1 if stack is empty, 0 otherwise.
+
+You can test using 'make test_simplestack'.
+
+
+ABSTRACT CLASSES IN C++
+-----------------------
+
+There are two problems with the SimpleStack above.
+
+    1) The user of the SimpleStack is also aware of its implementation 
+       details (ie, the stack is implemented using an array).
+    2) In case the user wants to use a better stack implementation (say
+       ListStack which is implemeted using linked list), the user has
+       to include "liststack.h" and recompile his code.
+
+There is no way an user can user another stack implementation without
+recompiling his code. This is where Abstract Data Types come in.
+
+Abstract Data Types (ADT) are defined in C++ using abstract classes, ie,
+classes which have ONLY pure virtual functions. Abstract classes declare ALL
+functions as pure virtual functions, and DO NOT declare any data. In other 
+words, it does not reveal any implementation details to the user.
+
+A Concrete implementation of an abstract class should derive from the abstract
+class and MUST implement ALL pure virtual functions declared in the abstract
+class.
+
+A user of the abstract class typically uses a pointer to an abstract class, 
+which actually points to an object of a concrete implementation. But the user
+is totally unaware of the concrete class or its implementation. So how can the
+user obtain a pointer to the abstract class, without knowing about the
+concrete class?
+
+This problem is usually solved by declaring a static 'create' method in the
+abstract class, which should create an object (of derived class) and return
+its pointer. This static methos is generally called the factory method.
+The concrete class will implement this static 'create' factory method
+by creating an object of the concrete class, and returning pointer to this
+object.
+
+
+Exercise 3
+----------
+
+You are provided with an abstract class Stack in the file stack.h.
+Open it and see before proceeding.
+
+Create a file arraystack.h with the following class.
+
+    #define MAX_ELEMENTS    100
+
+    class ArrayStack : public Stack
+    {
+        char arr[MAX_ELEMENTS];
+        int top;
+
+    public:
+        ArrayStack();
+
+        int push(char c);
+        int pop(char *c);
+        int empty(void);
+
+    };
+
+Create a file arraystack.cpp with the implementation of the above class.
+
+The file should also define the static factory method of Stack as follows.
+
+    Stack * Stack::create(void);
+
+This function should instantiate an object of type ArrayStack and return it.
+
+You can test by using 'make test_arraystack'.
+
+
