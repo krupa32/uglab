@@ -19,12 +19,17 @@ Create a file string.cpp with the following class AND its implementation.
         String();
         String(const char *s);
 
+        void get_data(char *s);
+
         String duplicate(void);
     };
 
 The String() constructor should initialize 'data' to an empty string.
 
 The String(const char *s) constructor should copy 's' into 'data'.
+
+the 'get_data' function should copy the string in the 'data' member
+variable to 's'. You can use strcpy function for this.
 
 The 'duplicate' function should create another String object which is an
 exact copy of this object, and return it.
@@ -50,7 +55,7 @@ Create a file simplestack.h with the following class declaration.
         int push(char c);
         int pop(char *c);
         int empty(void);
-    }
+    };
 
 The 'push' function should push 'c' onto the stack. It should return 1 on 
 success, 0 otherwise (in case stack is full).
@@ -130,7 +135,9 @@ The file should also define the static factory method of Stack as follows.
 
     Stack * Stack::create(void);
 
-This function should instantiate an object of type ArrayStack and return it.
+This function should create an object of type ArrayStack and return it.
+This is perfectly ok because a pointer to a derived object can be substituted
+for a pointer to base object.
 
 You can test by using 'make test_arraystack'.
 
