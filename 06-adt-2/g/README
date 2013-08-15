@@ -1,0 +1,125 @@
+
+Exercise 1
+----------
+
+Create a file linkedlist.h with the following declarations.
+
+    struct node
+    {
+        char c;
+        struct node *next;
+    };
+
+    struct linkedlist
+    {
+        struct node *head;
+    };
+
+    struct node * node_create(char c);
+    
+    struct linkedlist * linkedlist_create(void);
+
+    void linkedlist_free(struct linkedlist *l);
+
+    struct node * linkedlist_get_node(struct linkedlist *l, int pos);
+
+    void linkedlist_insert_before(struct linkedlist *l, 
+                                  struct node *before, struct node *n);
+
+    void linkedlist_del(struct linkedlist *l, struct node *n);
+
+    int linkedlist_count(struct linkedlist *l);
+
+
+The 'linkedlist_create' should create a new linked list.
+
+The 'linkedlist_free' should free all nodes in the linked list, as well as
+the list itself.
+
+The 'linkedlist_get_node' should return the node at position 'pos'.
+
+The 'linkedlist_insert_before' should insert 'n' BEFORE the node 'before'.
+
+The 'linkedlist_del' should remove the node 'n' and free it.
+
+The 'linkedlist_count' should return the number of nodes in the list.
+
+Create a file linkedlist.c that implements the functions declared above.
+
+You can test using 'make test_linkedlist'.
+
+
+Exercise 2
+----------
+
+A linear list is a data structure which stores a list of items. It can be
+thought of as a list of to-do items, list of shopping items and so on.
+Unlike a stack or queue, which supports adding items only to one end, a linear
+list provides support to insert/remove items in any position.
+
+DO NOT confuse a linear list with a linked list. A linear list is an abstract
+data structure, whereas a linked list can be used to IMPLEMENT a linear list.
+
+Create a file linearlist.h with the following declarations.
+
+    void * linearlist_create(void);
+
+    void linearlist_free(void *linearlist);
+
+    int linearlist_insert(void *linearlist, int pos, char c);
+
+    int linearlist_remove(void *linearlist, int pos);
+
+    char linearlist_get(void *linearlist, int pos);
+
+    void linearlist_set(void *linearlist, int pos, char c);
+
+    int linearlist_count(void *linearlist);
+
+The 'linearlist_create' should create a linear list and return a pointer that 
+can be used to reference the linear list.
+
+The 'linearlist_free' should free the linear list.
+
+The 'linearlist_insert' should insert 'c' in the list BEFORE the position
+'pos'. Note that if 'pos' is 0, the function should insert 'c' at beginning of 
+the linear list. The function should return 1 on success, 0 otherwise.
+
+The 'linearlist_remove' should remove the character at position 'pos'.
+
+The 'linearlist_get' should return the character at position 'pos'.
+
+The 'linearlist_set' should replace character at position 'pos' with 'c'.
+
+The 'linearlist_count' should return the number of elements in the linear list.
+
+Create a file linearlist.c which includes "linearlist.h" and implements the 
+above linear list functions. DO NOT implement any linked list functions again. 
+You have to REUSE the linked list functions implemented in the previous 
+exercise.
+
+For example, you can declare your linear list as follows.
+
+    struct list *linearlist;
+
+You can allocate/use this structure to represent a linear list, and typecast
+to this structure the 'void *' received in the linearlist_XXX functions.
+
+You can test by using the following commands.
+
+    $ gcc list.c linearlist.c stub_linearlist.o -o test_linearlist
+    $ ./test_linearlist
+
+
+
+Exercise 3
+----------
+
+Add rules for the target 'test_linearlist' in the Makefile.
+
+Remember the rule should generate the intermediate .o's before building the
+executable 'test_linearlist'. You can take a look at the previous session 
+Makefiles for some guidance.
+
+You can test by using 'make test_linearlist'.
+
