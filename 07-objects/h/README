@@ -21,7 +21,7 @@ Create a file string.cpp with the following class AND its implementation.
 
         void get_data(char *s);
 
-        String duplicate(void);
+        String reverse(void);
     };
 
 The String() constructor should initialize 'data' to an empty string.
