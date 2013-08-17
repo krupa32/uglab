@@ -1,0 +1,146 @@
+
+Hello Object World!
+
+From this session onwards, problems will be solved using object oriented
+programming in C++.
+
+Exercise 1
+----------
+
+Create a file string.cpp with the following class AND its implementation.
+
+    #define MAX_LEN    100
+
+    class String
+    {
+        char data[MAX_LEN];
+
+    public:
+        String();
+        String(const char *s);
+
+        void get_data(char *s);
+
+        String duplicate(void);
+    };
+
+The String() constructor should initialize 'data' to an empty string.
+
+The String(const char *s) constructor should copy 's' into 'data'.
+
+the 'get_data' function should copy the string in the 'data' member
+variable to 's'. You can use strcpy function for this.
+
+The 'reverse' function should create another String object which contains a
+reverse of the string in this object, and return it.
+
+You can test using 'make test_string'.
+
+
+Exercise 2
+----------
+
+Create a file simplequeue.h with the following class declaration.
+
+    #define MAX_ELEMENTS    100
+
+    class SimpleQueue
+    {
+        char arr[MAX_ELEMENTS];
+        int tail;
+
+    public:
+        SimpleQueue();
+
+        int insert(char c);
+        int remove(char *c);
+        int empty(void);
+    };
+
+The 'insert' function should insert 'c' at the tail of the queue. It should 
+return 1 on success, 0 otherwise (in case queue is full).
+
+The 'remove' function should remove the first character in queue and store it
+in 'c'. It should return 1 on success, 0 otherwise (queue is empty). Note that
+this function should also take care of modifying the array such that all the
+characters are moved to the previous position, and tail is decremented.
+
+The 'empty' function should return 1 if queue is empty, 0 otherwise.
+
+You can test using 'make test_simplequeue'.
+
+
+ABSTRACT CLASSES IN C++
+-----------------------
+
+There are two problems with the SimpleQueue above.
+
+    1) The user of the SimpleQueue is also aware of its implementation 
+       details (ie, the queue is implemented using an array).
+    2) In case the user wants to use a better queue implementation (say
+       ListQueue which is implemeted using linked list), the user has
+       to include "listqueue.h" and recompile his code.
+
+There is no way a user can user another queue implementation without
+recompiling his code. This is where Abstract Data Types come in.
+
+Abstract Data Types (ADT) are defined in C++ using abstract classes, ie,
+classes which have ONLY pure virtual functions. Abstract classes declare ALL
+functions as pure virtual functions, and DO NOT declare any data. In other 
+words, it does not reveal any implementation details to the user.
+
+A Concrete implementation of an abstract class should derive from the abstract
+class and MUST implement ALL pure virtual functions declared in the abstract
+class.
+
+A user of the abstract class typically uses a pointer to an abstract class, 
+which actually points to an object of a concrete implementation. But the user
+is totally unaware of the concrete class or its implementation. So how can the
+user obtain a pointer to the abstract class, without knowing about the
+concrete class?
+
+This problem is usually solved by declaring a static 'create' method in the
+abstract class, which should create an object (of derived class) and return
+its pointer. This static method is generally called the factory method.
+The concrete class will implement this static 'create' factory method
+by creating an object of the concrete class, and returning pointer to this
+object.
+
+
+Exercise 3
+----------
+
+You are provided with an abstract class Queue in the file queue.h.
+Open it and see before proceeding.
+
+Create a file arrayqueue.h with the following class.
+
+    #define MAX_ELEMENTS    100
+
+    class ArrayQueue : public Queue
+    {
+        char arr[MAX_ELEMENTS];
+        int tail;
+
+    public:
+        ArrayQueue();
+
+        int insert(char c);
+        int remove(char *c);
+        int empty(void);
+
+    };
+
+Create a file arrayqueue.cpp with the implementation of the above class.
+
+The file should also define the static factory method of Queue as follows.
+
+    Queue * Queue::create(void);
+
+This function should create an object of type ArrayQueue and return it.
+This is perfectly ok because a pointer to a derived object can be substituted
+for a pointer to base object.
+
+You can test by using 'make test_arrayqueue'.
+
+
