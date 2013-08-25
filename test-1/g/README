@@ -1,0 +1,64 @@
+Exercise 1
+----------
+
+Create a file queue.h with the following declarations.
+
+    #define MAX_ELEMENTS 100
+
+    int queue_insert(char c);
+
+    int queue_remove(char *c);
+
+    int queue_empty(void);
+
+The queue should support 'MAX_ELEMENTS' characters.
+
+The 'queue_insert' function should insert 'c' into the queue. It should
+return 1 on success, 0 otherwise (ie queue is full).
+
+The 'queue_remove' function should store the character removed from the queue
+in the character pointer passed as parameter. It should return 1 on success,
+0 otherwise (queue is empty).
+
+The 'queue_empty' function should return 1 if the queue is empty, 0 otherwise.
+
+Create a file queue.c which implements the above functions.
+
+You can test by using 'test_queue'.
+
+
+Exercise 2
+----------
+
+Create a file list.h with the following declarations.
+
+    struct node
+    {
+        char c;
+        struct node *next;
+    };
+
+    struct list
+    {
+        struct node *head;
+    };
+    
+
+    void list_add_tail(struct list *l, struct node *n);
+
+    struct node * list_get(struct list *l, int pos);
+
+    void list_del(struct list *l, struct node *n);
+
+The 'list_add_tail' should add 'n' to the tail of the list.
+
+The 'list_get' should return the node at position 'pos'. Note that if pos is
+0, it should return the 1st node in the list.
+
+The 'list_del' should remove 'n' from the list.
+
+Create a file list.c that implements the functions declared above.
+
+You can test using 'make test_list'.
+
+
