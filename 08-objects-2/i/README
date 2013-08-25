@@ -1,0 +1,185 @@
+
+Circular Doubly Linked List
+---------------------------
+
+A doubly linked list is one where each node contains a previous and next
+pointer, to the previous and next node, respectively. A circular doubly linked
+list is one where the tail->next points to head, and head->prev points to tail.
+
+Typically, a dummy head node is used to represent the head. The dummy node does
+not store any data. The real head (1st node) of the list is head->next. The
+real tail (last node) of the list is head->prev.
+
+A circular doubly linked list with dummy head can be picturized as follows.
+
+    ----------------------------------------
+    |                                      |
+    | ----------    -------     --------   |
+    ->||      ||--->||    ||--->||    ||----
+      || head ||    ||    ||    ||    ||
+    --||      ||<---||    ||<---||    ||<---
+    | ----------    --------    --------   |
+    |                                      |
+    ----------------------------------------
+
+
+Exercise 1
+----------
+
+PART 1
+------
+
+Create a file node.h with the following class.
+
+    class Node
+    {
+    protected:
+        Node *prev;
+        Node *next;
+
+    public:
+
+        Node();
+
+        Node * get_prev(void);
+
+        Node * get_next(void);
+
+        void insert_after(Node *p);
+
+        void remove(void);
+
+        void get_data(void *) = 0;
+
+        static Node *create(void *);
+        
+    };
+
+Node is an abstract class. It can only be used after deriving from it AND
+implementing the pure virtual get_data() function.
+
+The constructor should initialize the prev and next members to point to itself.
+
+The get_prev() and get_next() should return the prev and next pointer,
+respectively.
+
+The insert_after() should insert this node AFTER node 'p'.
+
+The remove() should unlink the node from the circular doubly linked list it is
+part of.
+
+The get_data() is a pure virtual function which takes a void * as parameter.
+This function is ONLY implemented by the derived class.
+
+The static 'create' function should create a derived class object and return
+its pointer. This function is also implemented by the derived class only.
+
+Create a file node.cpp that implements the above Node class. Note that only the
+destructor implementation is required.
+
+You can compile using 'g++ -c node.cpp'.
+
+PART 2
+------
+
+Create a file charnode.h with the following class.
+
+    class CharNode : public Node
+    {
+        char c;
+
+    public:
+        CharNode(char ch);
+
+        void get_data(void *p);
+    };
+
+The constructor should copy the character 'ch' to its member 'c'.
+
+The get_data function should store the character 'c' in the address pointed
+by 'p'.
+
+Create a file charnode.cpp that implements the above class.
+Note that charnode.cpp should also implement the static Node::create function.
+
+
+PART 3
+------
+
+Create a file dbllist.h with the following class.
+
+    class DblList
+    {
+        Node head;
+
+    public:
+        DblList();
+
+        void add_head(Node *n);
+
+        void add_tail(Node *n);
+
+        Node * get_node(int pos);
+
+        void remove(Node *n);
+
+        int empty(void);
+
+    };
+
+
+The constructor should initialize the list by setting the head's previous and
+next pointer to point to itself.
+
+The add_head should add a node to the head of the list.
+
+The add_tail should add a node to the tail of the list.
+
+The get_node should return pointer to Node at position 'pos'. Note that if
+'pos' is 0, it should return the first node in the list.
+
+The remove function should unlink the Node and free it.
+
+The empty() should return 1 if list is empty, 0 otherwise.
+
+Create a file dbllist.cpp that implements the above DblList class.
+
+
+
+You can test using 'make test_dbllist'.
+
+
+Exercise 2
+----------
+
+You are provided with an abstract class Stack in the file stack.h.
+Open it and see before proceeding.
+
+Create a file dblstack.h with the following class.
+
+    class DoubleStack : public Stack
+    {
+        DblList list;
+
+    public:
+        DoubleStack();
+
+        int push(char c);
+        int pop(char *c);
+        int empty(void);
+
+    };
+
+Create a file dblstack.cpp with the implementation of the above class.
+
+The file should also define the static factory method of Stack as follows.
+
+    Stack * Stack::create(void);
+
+This function should create an object of type DoubleStack and return it.
+This is perfectly ok because a pointer to a derived object can be substituted
+for a pointer to base object.
+
+You can test by using 'make test_dblstack'.
+
+
