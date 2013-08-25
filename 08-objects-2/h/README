@@ -65,12 +65,12 @@ respectively.
 
 The insert_after() should insert this node AFTER node 'p'.
 
-The remove() should unlink the node from the circular doubly linked list it is
-part of. It SHOULD NOT free/delete itself.
+The remove() should unlink this node from the circular doubly linked list it is
+part of. Note that remove() DOES NOT free itself.
 
 The get_data() is a pure virtual function which takes a void * as parameter.
 This function is ONLY implemented by the derived class. The void *
-parameter is also interpreted ONLY by the derived class.
+parameter is interpreted ONLY by the derived class.
 
 The static 'create' function should create a derived class object and return
 its pointer. This function is also implemented by the derived class only.
@@ -138,11 +138,12 @@ The get_node should return pointer to Node at position 'pos'. Note that if
 'pos' is 0, it should return the first node in the list.
 
 The remove function should unlink the Node (using the Node's remove
-function),  and then free it.
+function), and then free the node.
 
 The empty() should return 1 if list is empty, 0 otherwise.
 
 Create a file dbllist.cpp that implements the above DblList class.
+
 
 
 You can test using 'make test_dbllist'.
@@ -151,34 +152,34 @@ You can test using 'make test_dbllist'.
 Exercise 2
 ----------
 
-You are provided with an abstract class Stack in the file stack.h.
+You are provided with an abstract class Queue in the file queue.h.
 Open it and see before proceeding.
 
-Create a file dblstack.h with the following class.
+Create a file dblqueue.h with the following class.
 
-    class DoubleStack : public Stack
+    class DoubleQueue : public Queue
     {
         DblList list;
 
     public:
-        DoubleStack();
+        DoubleQueue();
 
-        int push(char c);
-        int pop(char *c);
+        int insert(char c);
+        int remove(char *c);
         int empty(void);
 
     };
 
-Create a file dblstack.cpp with the implementation of the above class.
+Create a file dblqueue.cpp with the implementation of the above class.
 
-The file should also define the static factory method of Stack as follows.
+The file should also define the static factory method of Queue as follows.
 
-    Stack * Stack::create(void);
+    Queue * Queue::create(void);
 
-This function should create an object of type DoubleStack and return it.
+This function should create an object of type DoubleQueue and return it.
 This is perfectly ok because a pointer to a derived object can be substituted
 for a pointer to base object.
 
-You can test by using 'make test_dblstack'.
+You can test by using 'make test_dblqueue'.
 
 
