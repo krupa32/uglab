@@ -1,4 +1,3 @@
-
 BINARY SEARCH TREE
 ------------------
 
@@ -33,8 +32,8 @@ Create a file bstree.h with the following declarations.
     struct BSTreeNode
     {
         int val;
-        BStreeNode *left;
-        BStreeNode *right;
+        BSTreeNode *left;
+        BSTreeNode *right;
     };
 
     class BSTree
