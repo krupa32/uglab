@@ -1,0 +1,77 @@
+
+
+Exercise 1
+----------
+
+Create a file list.h with the following class declaration.
+
+    struct Node
+    {
+        int val;
+        struct Node *next;
+    };
+
+    class List
+    {
+        struct Node *head;
+
+    public:
+        List();
+        struct Node *get_head(void);
+        void add_head(struct Node *n);
+        struct Node *remove_head(void);
+        struct Node *find(int val);
+    };
+
+The constructor should initialize the head to NULL.
+
+The 'get_head' should return the head of the list.
+
+The 'add_head' should add the node 'n' to the head of the list.
+
+The 'remove_head' should remove the head node from the list,
+update the head to point to the next node, and return the removed node.
+
+The 'find' should search the linked list for a node with value 'val',
+and return pointer to that node. If no node is found, it should return NULL.
+
+You can test using 'make test_list'.
+
+
+Exercise 2
+----------
+
+*** YOU HAVE TO FINISH EXERCISE 1 BEFORE PROCEEDING ***
+
+Create a stack.h with the following class declaration.
+
+    class Stack
+    {
+        List list;
+
+    public:
+        Stack();
+        void push(int val);
+        int pop(void);
+        int empty(void);
+        Stack *duplicate(void);
+        Stack *reverse(void);
+    };
+
+The constructor can be empty.
+
+The 'push' should push 'val' to the top of stack.
+
+The 'pop' should remove and return the value at top of stack.
+If the stack is empty, it should return -1.
+
+The 'empty' should return 1 if stack is empty, 0 otherwise.
+
+The 'duplicate' should create a new stack that is an exact duplicate
+of this stack and return the pointer to the new stack.
+
+The 'reverse' should create a new stack that contains same values in
+this stack, but in the reverse order. The function should return
+pointer to this new stack.
+
+You can test using 'make test_stack'.

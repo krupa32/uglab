@@ -1,0 +1,77 @@
+
+
+Exercise 1
+----------
+
+Create a file list.h with the following class declaration.
+
+    struct Node
+    {
+        int val;
+        struct Node *next;
+    };
+
+    class List
+    {
+        struct Node *head;
+
+    public:
+        List();
+        struct Node *get_tail(void);
+        void add_tail(struct Node *n);
+        struct Node *remove_head(void);
+        struct Node *find(int val);
+    };
+
+The constructor should initialize the head to NULL.
+
+The 'get_tail' should return the tail of the list.
+
+The 'add_tail' should add the node 'n' to the tail of the list.
+
+The 'remove_head' should remove the head node from the list,
+update the head to point to the next node, and return the removed node.
+
+The 'find' should search the linked list for a node with value 'val',
+and return pointer to that node. If no node is found, it should return NULL.
+
+You can test using 'make test_list'.
+
+
+Exercise 2
+----------
+
+*** YOU HAVE TO FINISH EXERCISE 1 BEFORE PROCEEDING ***
+
+Create a queue.h with the following class declaration.
+
+    class Queue
+    {
+        List list;
+
+    public:
+        Queue();
+        void add(int val);
+        int remove(void);
+        int empty(void);
+        Queue *duplicate(void);
+        int remove_lowest(void);
+    };
+
+The constructor can be empty.
+
+The 'add' should add 'val' to the tail of the queue.
+
+The 'remove' should remove and return the value at head of queue.
+If the queue is empty, it should return -1.
+
+The 'empty' should return 1 if queue is empty, 0 otherwise.
+
+The 'duplicate' should create a new queue that is an exact duplicate
+of this queue and return the pointer to the new queue.
+
+The 'remove_lowest' should scan the queue, remove the lowest
+value from the queue, and return it. If the queue is empty, it should
+return -1.
+
+You can test using 'make test_queue'.
