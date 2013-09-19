@@ -4,10 +4,8 @@
 int main()
 {
 	BSTree t;
-	int arr[10], count, ref[10] = { 1, 3, 2, 5, 7, 6, 4 };
-	int i;
 
-	printf("testing insert...");
+	printf("testing add...");
 	t.add(4);
 	t.add(2);
 	t.add(6);
