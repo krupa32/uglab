@@ -1,5 +1,3 @@
-
-
 Exercise 1
 ----------
 
@@ -34,6 +32,8 @@ update the head to point to the next node, and return the removed node.
 
 The 'find' should search the linked list for a node with value 'val',
 and return pointer to that node. If no node is found, it should return NULL.
+
+Implement the above functions in list.cpp.
 
 You can test using 'make test_list'.
 

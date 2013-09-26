@@ -1,5 +1,3 @@
-
-
 Exercise 1
 ----------
 
@@ -17,10 +15,10 @@ Create a file list.h with the following class declaration.
 
     public:
         List();
-        struct Node *get_tail(void);
-        void add_tail(struct Node *n);
-        struct Node *remove_head(void);
-        struct Node *find(int val);
+        struct Node *get_tail(void);		(1)
+        void add_tail(struct Node *n);		(4)
+        struct Node *remove_head(void);		(2)
+        struct Node *find(int val);		(3)
     };
 
 The constructor should initialize the head to NULL.
@@ -51,11 +49,11 @@ Create a queue.h with the following class declaration.
 
     public:
         Queue();
-        void add(int val);
-        int remove(void);
-        int empty(void);
-        Queue *duplicate(void);
-        int remove_lowest(void);
+        void add(int val);		(2)
+        int remove(void);		(2)
+        int empty(void);		(1)
+        Queue *duplicate(void);		(5)
+        int remove_lowest(void);	(5)
     };
 
 The constructor can be empty.
