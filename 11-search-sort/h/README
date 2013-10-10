@@ -10,6 +10,8 @@ The function should do a BINARY SEARCH on 'arr' for the number 'val'.
 'size' is the total number of elements in the array 'arr'. The function should 
 return 1 on success, 0 otherwise.
 
+You can compile using 'make search' and test using 'make test_search'.
+
 
 Exercise 2
 ----------
@@ -21,6 +23,8 @@ Create a file sort.c with the following function.
 The function should do a BUBBLE SORT of array 'arr'. 'size' is the total
 number of elements in the array. Note that the sorted sequence is also stored
 in the same array 'arr'.
+
+You can compile using 'make sort' and test using 'make test_sort'.
 
 
 Exercise 3
@@ -34,3 +38,4 @@ The function should do a QUICK SORT of array 'arr'. 'size' is the total
 number of elements in the array. Note that the sorted sequence is also stored
 in the same array 'arr'.
 
+You can compile using 'make qsort' and test using 'make test_qsort'.

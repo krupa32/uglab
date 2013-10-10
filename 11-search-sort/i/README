@@ -2,7 +2,7 @@
 Exercise 1
 ----------
 
-Create a file search.c with the following function.
+Create a file bsearch.c with the following function.
 
     int bsearch(int *arr, int size, int val);
 
@@ -10,11 +10,12 @@ The function should do a BINARY SEARCH on 'arr' for the number 'val'.
 'size' is the total number of elements in the array 'arr'. The function should 
 return 1 on success, 0 otherwise.
 
+You can compile with "make bsearch" and test with "make test_bsearch".
 
 Exercise 2
 ----------
 
-Create a file sort.c with the following function.
+Create a file isort.c with the following function.
 
     void sort(int *arr, int size);
 
@@ -22,11 +23,12 @@ The function should do an INSERTION SORT of array 'arr'. 'size' is the total
 number of elements in the array. Note that the sorted sequence is also stored
 in the same array 'arr'.
 
+You can compile using "make isort" and test using "make test_isort".
 
 Exercise 3
 ----------
 
-Create a file qsort.c with the following function.
+Create a file msort.c with the following function.
 
     void mergesort(int *arr, int size);
 
@@ -34,3 +36,4 @@ The function should do a MERGE SORT of array 'arr'. 'size' is the total
 number of elements in the array. Note that the sorted sequence is also stored
 in the same array 'arr'.
 
+You can compile using "make msort" and test using "make test_msort".
