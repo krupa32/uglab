@@ -6,7 +6,7 @@
 
 #define SWAP(x,y,t)		{ t=x; x=y; y=t; }
 
-void heapify(int *heap, int size, int index)
+void bubble_down(int *heap, int size, int index)
 {
 	int left, right, tmp, smallest;
 
@@ -22,22 +22,28 @@ void heapify(int *heap, int size, int index)
 
 	if (smallest != index) {
 		SWAP(heap[smallest], heap[index], tmp);
-		heapify(heap, size, smallest);
+		bubble_down(heap, size, smallest);
 	}
 }
 
-void build_heap(int *heap, int size)
+void bubble_up(int *heap, int size, int i)
 {
-	int i;
+	int parent = PARENT(i), tmp;
 
-	for (i = size/2; i >= 0; i--)
-		heapify(heap, size, i);
+	while (i > 0) {
+		parent = PARENT(i);
+
+		if (heap[i] < heap[parent])
+			SWAP(heap[i], heap[parent], tmp);
+
+		i = parent;
+	}
 }
 
 void insert(int *heap, int size, int val)
 {
 	heap[size] = val;
-	build_heap(heap, size+1);
+	bubble_up(heap, size+1, size);
 }
 
 int remove_min(int *heap, int size)
@@ -46,7 +52,7 @@ int remove_min(int *heap, int size)
 
 	SWAP(heap[0], heap[size-1], tmp);
 
-	heapify(heap, size-1, 0);
+	bubble_down(heap, size-1, 0);
 
 	return ret;
 }
