@@ -1,0 +1,99 @@
+
+Exercise 1
+----------
+
+Create a file sort.c with the following function.
+
+    void sort(int *arr, int size);  [10]
+
+The function should do a SELECTION SORT of array 'arr'. 'size' is the total
+number of elements in the array. Note that the sorted sequence is also stored
+in the same array 'arr'.
+
+Selection sort is a sorting method where in each iteration, the smallest
+element (from the unsorted elements) is selected, and stored in its
+corresponding position in the array. For eg, in the 1st iteration, the
+1st (or most) smallest element is selected and stored in 1st position of
+the array. In the 2nd iteration, the 2nd smallest element is stored in the
+2nd position in the array, and so on until all elements are exhausted.
+
+You can test using 'make test_sort'.
+
+
+Exercise 2
+----------
+
+Create a file bstree.h with the following declarations.
+
+    struct BSTreeNode
+    {
+        int val;
+        struct BSTreeNode *left;
+        struct BSTreeNode *right;
+    };
+
+    class BSTree
+    {
+        struct BSTreeNode *root;
+
+    public:
+        BSTree();
+        void add(int val);                         [6 - for add and search]
+        int search(int val);
+        int get_balancing_factor(void);            [4]
+    };
+
+The constructor should set the member 'root' to NULL.
+
+The 'add' should allocate a node, assign 'val' to the node, and add the
+node to the tree pointed by 'root'.
+
+The 'search' should scan the tree for a node with value 'val'. If such a node
+is found, it should return 1, 0 otherwise.
+
+The 'get_balancing_factor' should return the balancing factor of the root
+node of the tree. The balancing factor of a node is defined as the difference
+between the height of the left subtree and height of the right subtree.
+
+For example,
+
+     4
+    / \
+   /   \
+  2     6
+ / \   / \
+1   3 5   7
+
+Balancing factor of root node = 0.
+
+     4
+    / \
+   /   \
+  2     6
+       / \
+      5   7
+
+Balancing factor of root node is -1, because height of left subtree is 1
+and height of right subtree is 2.
+
+     4
+    /
+   /
+  2
+ / \
+1   3
+
+
+Balancing factor of root node is +2, because height of left subtree is 2
+and height of right subtree is 0.
+
+Create a file bstree.cpp with the implementation of the above functions.
+
+You can test using 'make test_bstree'.
+
+IMPORTANT: Every function carries some marks. So even if you do not know how 
+to implement a function, write an empty function so that your code can
+compile and execute. This way, the functions you have completed will
+fetch you marks.
+
+
