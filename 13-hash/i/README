@@ -1,0 +1,128 @@
+
+HASH TABLE
+----------
+
+A Hash Table is a data structure that is used to store entries such that the
+average time for a search is O(1).
+
+It is generally implemented using an array of entries, where the entries can be
+characters, integers, structures, pointers to linked lists etc. An element with
+key 'k' is stored in slot H(k). Since the size of the array is limited, two
+keys may hash to the same slot/entry. This is called Collision.
+
+Collision Resolution
+--------------------
+
+Collision resolution can be of two types.
+    - Chaining
+          In this method, elements are stored OUTSIDE the hash table.
+          Each entry in the hash table is a pointer to a linked list. Entries
+          with keys which hash to the same slot are stored in the linked list.
+    - Open Addressing
+          In this method, elements are stored WITHIN the hash table.
+          When a collision happens, another slot is computed. If this slot is
+          occupied, then another slot is found, and so on, until all available
+          slots are exhausted. Some common open addressing methods are listed
+          below.
+
+          o Linear Probing
+                H(k, i) = [ h(k) + i ] mod m
+
+          o Quadrating Probing
+                H(k) = [ h(k) + c1*i + c2*(i^2) ] mod m
+
+          o Double Hashing
+                H(k) = [ h1(k) + i*h2(k) ] mod m
+
+          Here h, h1, h2 are hash functions, m is size of the hash table,
+          c1, c2 are some constants, and i = 0 ... (m-1).
+
+
+Exercise 1
+----------
+
+Create a file hashtable.h with the following class.
+
+    struct entry
+    {
+        int key;
+        int val;
+    };
+
+    class HashTable
+    {
+        int size;
+        struct entry *arr;
+
+    public:
+        HashTable(int size);
+        int insert(struct entry *e);
+        int search(int key, int *val, int *nops);
+    };
+
+The constructor should allocate a hash table of size 'size'.
+
+The 'insert' function should insert 'e' into the hash table. The function 
+should return 1 on success, 0 otherwise.
+The hash function to use is
+    h(k) = [ k^2 ] mod size
+In case of collisions, linear probing is used for resolution. You can assume
+that keys are ALWAYS greater than 0. In other words, key value 0 can be used
+to denote that the entry is free. 
+
+The 'search' should search for entry with key 'key' in the hash table.
+If found, it should return 1 and store the value for key in 'val' AND 
+store the number of operations in 'nops'. The number of operations is 
+defined as the number of entries/slots looked up in the hash table to find 
+the key. If the key is not found, the function should return 0.
+
+Create a file hashtable.cpp with the implementation of HashTable.
+
+You can test using 'make test_hashtable'.
+
+
+Exercise 2
+----------
+
+Create a file openhash.h with the following class.
+
+    struct entry
+    {
+        int key;
+        int val;
+	struct entry *next;
+    };
+
+    class OpenHashTable
+    {
+        int size;
+        struct entry **arr;
+
+    public:
+        OpenHashTable(int size);
+        int insert(struct entry *e);
+        int search(int key, int *val, int *nops);
+    };
+
+The constructor should allocate a hash table (array of struct entry pointers) 
+of size 'size'.
+
+The 'insert' function should insert 'e' into the hash table. The function 
+should return 1 on success, 0 otherwise.
+The hash function to use is
+    h(k) = [ k^2 ] mod size
+In case of collisions, open hashing (or chaining) is used for resolution. 
+That is, you have to allocate a struct entry, copy the information from 'e',
+and add this entry to the HEAD of the linked list which is 
+pointed by arr[ h(k) ].
+
+The 'search' should search for entry with key 'key' in the hash table.
+If found, it should return 1 and store the value for key in 'val' AND 
+store the number of operations in 'nops'. The number of operations is 
+defined as the number of entries looked up in the hash table to find 
+the key. If the key is not found, the function should return 0.
+
+Create a file openhash.cpp with the implementation of OpenHashTable.
+
+You can test using 'make test_openhash'.
+
