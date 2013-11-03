@@ -1,0 +1,98 @@
+
+GENERAL INSTRUCTIONS
+--------------------
+
+1) Every function carries some marks, as indicated.
+   Every function MUST be defined for the test programs to compile and run.
+   Therefore, if you know how to implement func1(), but don't know how to
+   implement func2(), define an empty func2() with the same prototype as
+   mentioned in the question. Your func2() may fail the tests, but your
+   func1() may pass and you may get marks for that.
+
+
+Exercise 1
+----------
+
+Create a file stack.c which implements an integer stack of 50 integers.
+The stack should support the following functions.
+
+    int push(int val);  [ 4 ]
+    int pop(int *val);  [ 4 ]
+    int empty(void);    [ 2 ]
+
+The 'push' function should push the number 'val' onto top of the stack.
+It should return 1 on success, 0 on failure (ie, stack is full).
+
+The 'pop' function should pop the topmost number of the stack and store it
+in 'val'. It should return 1 on success, or 0 on failure (ie, stack is empty).
+
+The 'empty' function should return 1 if stack is empty, 0 otherwise.
+
+You can compile and test using 'make test_stack'.
+
+
+Exercise 2
+----------
+
+Create a file list.h with the following class declaration.
+
+    struct Node
+    {
+        int val;
+        struct Node *next;
+    };
+
+    class List
+    {
+        struct Node *head;
+
+    public:
+        List();
+        struct Node * get_head(void);
+        void add_tail(int val);             [ 3 ]
+        void remove(int val);               [ 4 ]
+        int search(int val, int *nops);     [ 2, for return value
+                                              1, for nops ]
+    };
+
+The 'get_head' should return the head of the list.
+
+The 'add_tail' should add the number 'val' to the tail of the list.
+
+The 'remove' should search for the first occurence of 'val' in the list,
+and remove it from the list.
+
+The 'search' should search for 'val' in the list. It should return 1 if 'val'
+is present, 0 otherwise. Also, it should store the number of nodes visited
+to find 'val' in the list. For eg, if 'val' is the 4th node in the list, it
+should return 4.
+
+Create a file list.cpp with the implementation of above List class.
+
+You can test using 'make test_list'.
+
+
+Exercise 3
+----------
+
+Create a file sorter.h, which contains the following abstract base class.
+
+    class Sorter
+    {
+    public:
+        virtual void sort(char **arr, int size) = 0;      [ 5 ]
+
+        static Sorter * create(void);
+    };
+
+Create a file heapsorter.h, which declares a concrete class HeapSorter that
+derives from Sorter and implements the 'sort' function.
+Create a file heapsorter.cpp that implements the HeapSorter class,
+and defines the Sorter's static 'create' function.
+
+The 'sort' function takes an array of strings and sorts the strings in
+lexicographic (alphabetic) order. Lexicographic comparison of two strings
+can be done using the 'strcmp' library routine.
+
+You can test using 'make test_heapsorter'.
+

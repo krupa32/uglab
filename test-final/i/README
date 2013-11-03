@@ -1,0 +1,130 @@
+
+GENERAL INSTRUCTIONS
+--------------------
+
+1) Every function carries some marks, as indicated.
+   Every function MUST be defined for the test programs to compile and run.
+   Therefore, if you know how to implement func1(), but don't know how to
+   implement func2(), define an empty func2() with the same prototype as
+   mentioned in the question. Your func2() may fail the tests, but your
+   func1() may pass and you may get marks for that.
+
+
+Exercise 1
+----------
+
+Create a file queue.c which implements an integer queue of 50 integers.
+The queue should support the following functions.
+
+    int insert(int val);   [ 4 ]
+    int remove(int *val);  [ 4 ]
+    int empty(void);       [ 2 ]
+
+The 'insert' function should insert the number 'val' onto the tail of the
+queue. It should return 1 on success, 0 on failure (ie, queue is full).
+
+The 'remove' function should remove the number at the head of queue and store 
+it in 'val'. It should return 1 on success, or 0 on failure (ie, queue is 
+empty).
+
+The 'empty' function should return 1 if queue is empty, 0 otherwise.
+
+You can compile and test using 'make test_queue'.
+
+
+Exercise 2
+----------
+
+Create a file bstree.h with the following class declaration.
+
+    struct Node
+    {
+        int val;
+        struct Node *left;
+        struct Node *right;
+    };
+
+    class BSTree
+    {
+        struct Node *root;
+
+    public:
+        BSTree();
+        void insert(int val);                   [ 4 ]
+        void postorder(int *arr, int *count);   [ 3 ]
+        int search(int val, int *nops);         [ 2, for return value
+                                                  1, for nops ]
+    };
+
+The 'insert' should insert 'val' into the binary search tree.
+
+The 'postorder' should do a postorder traversal of the tree and store the
+numbers in the tree (in postorder form) in the 'arr' array. It should also
+store the total number of nodes in the tree in 'count'.
+
+The 'search' should search for the value 'val' in the tree. It should
+return 1 if 'val' is found, 0 otherwise. Also, if 'val' is found, the
+number of operations should be stored in 'nops'. Numer of operations
+is defined as the number of nodes visited in finding val (including the 
+node for 'val').
+
+You can test using 'make test_bstree'.
+
+
+Exercise 3
+----------
+
+Create a file heap.h with the following declarations.
+
+    struct Node
+    {
+        int val;
+        struct Node *left;
+        struct Node *right;
+        struct Node *parent;
+    };
+
+    class Heap
+    {
+        struct Node *root;
+
+    public:
+        Heap();
+        struct Node *get_root(void);
+        void insert(struct Node *n);   [ 5 ]
+    }
+
+The class Heap should implement a MIN HEAP.
+
+The 'get_root' should return the root of the heap.
+
+The 'insert' should insert the node 'n' into the heap. Note that the node
+pointer is directly inserted. A new struct Node MUST NOT be allocated.
+
+To insert a node in the heap, you will first have to determine the last
+position in the heap. While this is easy in case of arrays, it is not so
+easy when the heap is implemented using a binary tree structure. One way
+to do this is as follows.
+
+A non-full node is defined as a node which has less than 2 children (0 or 1).
+Traverse the binary tree (in any order). Find the FIRST non-full node in 
+the LEAST level. The newly inserted node should be the child (left or right) 
+of this node.
+
+For example,
+    1                                  1
+   / \                                / \
+  2   3                              2   3
+ /                                  / \
+4                                  4   5
+
+[2 is the first                  [3 is the first non-full
+ non-full node                    node in the least level]
+ in the least level]
+
+Once a new node is inserted in the last position, then the heap can be
+rearranged by using the 'parent' pointer to move up the tree and 
+exchanging the node values, wherever appropriate.
+
+You can test using 'make test_heap'.
+
