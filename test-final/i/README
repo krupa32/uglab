@@ -17,13 +17,13 @@ Create a file queue.c which implements an integer queue of 50 integers.
 The queue should support the following functions.
 
     int insert(int val);   [ 4 ]
-    int remove(int *val);  [ 4 ]
+    int delete(int *val);  [ 4 ]
     int empty(void);       [ 2 ]
 
 The 'insert' function should insert the number 'val' onto the tail of the
 queue. It should return 1 on success, 0 on failure (ie, queue is full).
 
-The 'remove' function should remove the number at the head of queue and store 
+The 'delete' function should remove the number at the head of queue and store 
 it in 'val'. It should return 1 on success, or 0 on failure (ie, queue is 
 empty).
 
@@ -68,6 +68,8 @@ number of operations should be stored in 'nops'. Numer of operations
 is defined as the number of nodes visited in finding val (including the 
 node for 'val').
 
+Create a file bstree.cpp which implements the BSTree class.
+
 You can test using 'make test_bstree'.
 
 
@@ -92,7 +94,7 @@ Create a file heap.h with the following declarations.
         Heap();
         struct Node *get_root(void);
         void insert(struct Node *n);   [ 5 ]
-    }
+    };
 
 The class Heap should implement a MIN HEAP.
 
@@ -103,12 +105,19 @@ pointer is directly inserted. A new struct Node MUST NOT be allocated.
 
 To insert a node in the heap, you will first have to determine the last
 position in the heap. While this is easy in case of arrays, it is not so
-easy when the heap is implemented using a binary tree structure. One way
-to do this is as follows.
+easy when the heap is implemented using a binary tree structure.
 
-A non-full node is defined as a node which has less than 2 children (0 or 1).
-Traverse the binary tree (in any order). Find the FIRST non-full node in 
-the LEAST level. The newly inserted node should be the child (left or right) 
+Let us define a 'non-full' node as a node which has less than 2 children 
+(0 or 1). The last position in the heap can be found using one of the two
+methods:
+
+    1) Do depth first traversal of the binary tree and find the FIRST non-full
+       node in the LEAST level.
+    2) Do breadth first traversal of the binary tree and find the FIRST
+       non-full node. [Since breadth first traversal anyway goes level by
+       level, the least level is implied].
+
+The newly inserted node should be the child (left or right) 
 of this node.
 
 For example,
@@ -125,6 +134,8 @@ For example,
 Once a new node is inserted in the last position, then the heap can be
 rearranged by using the 'parent' pointer to move up the tree and 
 exchanging the node values, wherever appropriate.
+
+Create file heap.cpp which implements the above class.
 
 You can test using 'make test_heap'.
 
